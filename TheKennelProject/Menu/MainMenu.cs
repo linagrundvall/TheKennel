@@ -35,8 +35,8 @@ namespace TheKennelProject.Menu
             Console.WriteLine(value: "4. Check in dog");
             Console.WriteLine(value: "5. Check out dog");
             Console.WriteLine(value: "6. List customers");
-            Console.WriteLine(value: "6. List dogs");
-            Console.WriteLine(value: "6. List current dogs");
+            Console.WriteLine(value: "7. List dogs");
+            Console.WriteLine(value: "8. List current dogs");
             Console.WriteLine(value: "");
             Console.WriteLine(value: "********************************************");
         }
@@ -60,19 +60,20 @@ namespace TheKennelProject.Menu
                     break;
                 case ConsoleKey.D4:
                 case ConsoleKey.NumPad4:
-                    RoomManager.AddDogToRoom();
+                    DogManager.CheckInDog();
                     break;
                 case ConsoleKey.D5:
                 case ConsoleKey.NumPad5:
-                    Console.WriteLine("Animal checked out. Here is the receipt:");
+                    DogManager.CheckOutDog();
+
                     break;
                 case ConsoleKey.D6:
                 case ConsoleKey.NumPad6:
-                    Console.WriteLine("List customers");
+                    CustomerManager.ListCustomers();
                     break;
                 case ConsoleKey.D7:
                 case ConsoleKey.NumPad7:
-                    Console.WriteLine("List animals");
+                    DogManager.ListDogs();
                     break;
                 case ConsoleKey.D8:
                 case ConsoleKey.NumPad8:

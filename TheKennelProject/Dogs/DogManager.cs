@@ -3,6 +3,7 @@ using TheKennelProject.Data;
 using TheKennelProject.Factories;
 using TheKennelProject.Treatments;
 using TheKennelProject.Dogs;
+using TheKennelProject.Customers;
 
 namespace TheKennelProject.Dogs
 {
@@ -17,6 +18,10 @@ namespace TheKennelProject.Dogs
         public void RegisterDog()
         {
             // TODO: Split input into another class/method?
+            Console.WriteLine(value: "Please enter personal identification number.");
+            ICustomer customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
+            // TODO: Koppla customerPID till dog
+
             IDog dog = DogFactory.Create();
 
             Console.WriteLine(value: "Please enter the dogs name.");
@@ -94,6 +99,40 @@ namespace TheKennelProject.Dogs
             Db.SaveDog(dog);
             Console.WriteLine("Treatment registered");
             Console.WriteLine(value: "");
+        }
+        public void CheckInDog()
+        {
+            // TODO: Break out into different methods?
+            Console.WriteLine(value: "Please enter the name of the dog");
+            IDog dog = Db.GetDogByName(Console.ReadLine());
+            dog.IsCheckedIn = true;
+            Console.WriteLine(value: "");
+            Console.WriteLine("The dog has been checked in");
+            Console.WriteLine(value: "");
+        }
+
+        public void CheckOutDog()
+        {
+            // TODO: Break out into different methods?
+            Console.WriteLine(value: "Please enter the name of the dog");
+            IDog dog = Db.GetDogByName(Console.ReadLine());
+            dog.IsCheckedIn = false;
+            Console.WriteLine(value: "");
+            Console.WriteLine("The dog has been checked out");
+            Console.WriteLine(value: "");
+            Console.WriteLine("Here is the receipt:");
+        }
+
+        public void ListDogs()
+        {
+            var dogs = Db.GetAllDogs();
+            Console.WriteLine("");
+
+            foreach (var dog in dogs)
+            {
+                Console.WriteLine(dog.Name);
+            }
+            Console.WriteLine("");
         }
     }
 }

@@ -34,7 +34,31 @@ namespace TheKennelProject.Customers
             customer.Notes = Console.ReadLine();
 
             Db.SaveCustomer(customer);
+            Console.WriteLine("");
             Console.WriteLine("Customer registered");
+            Console.WriteLine("");
+        }
+
+        public void ListCustomers()
+        {
+            var customers = Db.GetAllCustomers();
+            Console.WriteLine("");
+
+            foreach (var customer in customers)
+            {
+                Console.WriteLine(customer.FirstName + " " + customer.LastName);
+            }
+            Console.WriteLine("");
+        }
+
+        public void ShowCustomer()
+        {
+
+            Console.WriteLine(value: "Please enter personal identification number.");
+            ICustomer customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
+            
+            Console.WriteLine(customer.FirstName + " " + customer.LastName);
+            Console.WriteLine("");
         }
     }
 }

@@ -4,5 +4,8 @@
     {
         void RegisterDog();
         void RegisterDogTreatment();
+        void CheckInDog();
+        void CheckOutDog();
+        void ListDogs();
     }
 }

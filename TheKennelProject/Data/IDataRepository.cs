@@ -10,6 +10,7 @@ namespace TheKennelProject.Data
     {
         IDBUsingLists Db { get; set; }
 
+        ICustomer GetCustomerByPersonalIdNumber(string personalIdentificationNumber);
         List<IRoom> GetAllRooms();
         IRoom GetRoomByDog(IDog dog);
         IRoom GetRoomByGuid(Guid guid);
@@ -17,5 +18,7 @@ namespace TheKennelProject.Data
         IDog GetDogByName(string name);
         void SaveDog(IDog dog);
         void SaveCustomer(ICustomer customer);
+        List<ICustomer> GetAllCustomers();
+        List<IDog> GetAllDogs();
     }
 }

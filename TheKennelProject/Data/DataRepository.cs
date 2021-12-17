@@ -18,6 +18,10 @@ namespace TheKennelProject.Data
         {
             Db = db;
         }
+        public ICustomer GetCustomerByPersonalIdNumber(string personalIdentificationNumber)
+        {
+            return Db.Customers.Where(c => c.PersonalIdentificationNumber == personalIdentificationNumber).FirstOrDefault();
+        }
 
         public IRoom GetRoomByRoomNumber(string roomNumber)
         {
@@ -53,5 +57,16 @@ namespace TheKennelProject.Data
         {
             Db.Customers.Add(customer);
         }
+
+        public List<IDog> GetAllDogs()
+        {
+            return Db.Dogs.ToList();
+        }
+
+        public List<ICustomer> GetAllCustomers()
+        {
+            return Db.Customers.ToList();
+        }
+
     }
 }
