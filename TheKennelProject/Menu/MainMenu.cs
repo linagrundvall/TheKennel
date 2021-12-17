@@ -57,8 +57,6 @@ namespace TheKennelProject.Menu
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
                     DogManager.RegisterDogTreatment();
-                    //Som PetsAllowed etc
-                    Console.WriteLine("Treatment registered");
                     break;
                 case ConsoleKey.D4:
                 case ConsoleKey.NumPad4:

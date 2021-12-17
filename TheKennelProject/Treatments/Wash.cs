@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TheKennelProject.Treatments
 {
-    class Washing : ITreatment
+    class Wash : ITreatment
     {
-        public string Name => "Washing";
+        public string Name => "Wash";
 
         public string Description => "The dog is being washed.";
 
