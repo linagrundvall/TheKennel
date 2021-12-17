@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheKennelProject.Customers;
 using TheKennelProject.Dogs;
 using TheKennelProject.Rooms;
 
@@ -12,19 +13,32 @@ namespace TheKennelProject.Menu
     {
         public IDogManager DogManager { get; set; }
         public IRoomManager RoomManager { get; set; }
+        public ICustomerManager CustomerManager { get; set; }
 
-        public MainMenu(IDogManager dogManager, IRoomManager roomManager)
+        public MainMenu(IDogManager dogManager, IRoomManager roomManager, ICustomerManager customerManager)
         {
             DogManager = dogManager;
             RoomManager = roomManager;
+            CustomerManager = customerManager;
         }
         public void Show()
         {
-            Console.WriteLine(value: "**********************************");
-            Console.WriteLine(value: "     Welcome to the Kennel");
-            Console.WriteLine(value: "**********************************");
-            Console.WriteLine(value: "1. Register dog");
-            Console.WriteLine(value: "2. Add dog to room");
+            Console.WriteLine(value: "********************************************");
+            Console.WriteLine(value: "");
+            Console.WriteLine(value: "          Welcome to the Kennel");
+            Console.WriteLine(value: "");
+            Console.WriteLine(value: "********************************************");
+            Console.WriteLine(value: "");
+            Console.WriteLine(value: "1. Register customer");
+            Console.WriteLine(value: "2. Register dog");
+            Console.WriteLine(value: "3. Register special treatment for dog");
+            Console.WriteLine(value: "4. Check in dog");
+            Console.WriteLine(value: "5. Check out dog");
+            Console.WriteLine(value: "6. List customers");
+            Console.WriteLine(value: "6. List dogs");
+            Console.WriteLine(value: "6. List current dogs");
+            Console.WriteLine(value: "");
+            Console.WriteLine(value: "********************************************");
         }
 
         public void GetInput()
@@ -34,11 +48,37 @@ namespace TheKennelProject.Menu
             {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    DogManager.RegisterDog();
+                    CustomerManager.RegisterCustomer();
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
+                    DogManager.RegisterDog();
+                    break;
+                case ConsoleKey.D3:
+                case ConsoleKey.NumPad3:
+                    DogManager.RegisterDogTreatment();
+                    //Som PetsAllowed etc
+                    Console.WriteLine("Treatment registered");
+                    break;
+                case ConsoleKey.D4:
+                case ConsoleKey.NumPad4:
                     RoomManager.AddDogToRoom();
+                    break;
+                case ConsoleKey.D5:
+                case ConsoleKey.NumPad5:
+                    Console.WriteLine("Animal checked out. Here is the receipt:");
+                    break;
+                case ConsoleKey.D6:
+                case ConsoleKey.NumPad6:
+                    Console.WriteLine("List customers");
+                    break;
+                case ConsoleKey.D7:
+                case ConsoleKey.NumPad7:
+                    Console.WriteLine("List animals");
+                    break;
+                case ConsoleKey.D8:
+                case ConsoleKey.NumPad8:
+                    Console.WriteLine("List current animals");
                     break;
                 default:
                     Console.WriteLine(value: "Unknown command. Please try again.");

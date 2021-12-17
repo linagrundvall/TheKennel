@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheKennelProject.Customers;
 using TheKennelProject.Dogs;
-using TheKennelProject.Entities;
 using TheKennelProject.Rooms;
+using TheKennelProject.Treatments;
 
 namespace TheKennelProject.Data
 {
@@ -13,15 +14,16 @@ namespace TheKennelProject.Data
     {
         public List<IRoom> Rooms { get; set; }
 
-        //Dog instead of guests
         public List<IDog> Dogs { get; set; }
-        public List<Customer> Customers { get; set; }
+        public List<ICustomer> Customers { get; set; }
+        //public List<ITreatment> Treatments { get; set; }
 
         public DBUsingLists()
         {
             Rooms = new List<IRoom>();
             Dogs = new List<IDog>();
-            Customers = new List<Customer>();
+            Customers = new List<ICustomer>();
+            //Treatments = new List<ITreatment>();
         }
     }
 }

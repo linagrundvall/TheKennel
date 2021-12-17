@@ -14,7 +14,6 @@ namespace TheKennelProject.Rooms
         }
         public void AddDogToRoom()
         {
-            // TODO: Validation
             // TODO: Break out into different methods?
             Console.WriteLine(value: "Please enter the name of the dog.");
             IDog dog = Db.GetDogByName(Console.ReadLine());
@@ -24,15 +23,13 @@ namespace TheKennelProject.Rooms
 
             room.CurrentDogs.Add(dog);
 
-            }
+        }
             public void ListRooms()
             {
+                //var List<IRoom> rooms = Db.GetAllRooms();
                 var rooms = Db.GetAllRooms();
-            //    foreach (var room in rooms)
-            //    {
-            //        Console.WriteLine(room.RoomNumber);
 
-                foreach (var room in rooms)
+            foreach (var room in rooms)
                 {
                     foreach (var property in room.RoomProperties)
                     {
@@ -41,6 +38,6 @@ namespace TheKennelProject.Rooms
                     }
                 }
             }
-        }
+        
     }
 }

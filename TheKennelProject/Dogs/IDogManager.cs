@@ -3,5 +3,6 @@
     internal interface IDogManager
     {
         void RegisterDog();
+        void RegisterDogTreatment();
     }
 }

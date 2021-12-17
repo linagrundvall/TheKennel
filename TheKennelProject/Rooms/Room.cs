@@ -14,7 +14,7 @@ namespace TheKennelProject.Rooms
         public string RoomNumber { get; set; }
         public decimal Price { get; set; }
 
-        //Listing the dogs(guests) in this room
+        //Listing the dogs in this room
         public List<IDog> CurrentDogs { get; set; }
         public List<IRoomProperty> RoomProperties { get; set; }
         

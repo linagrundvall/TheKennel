@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TheKennelProject.Entities
+namespace TheKennelProject.Customers
 {
     interface ICustomer
     {

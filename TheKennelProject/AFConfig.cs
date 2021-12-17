@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using TheKennelProject.Customers;
 using TheKennelProject.Data;
 using TheKennelProject.Dogs;
-using TheKennelProject.Entities;
 using TheKennelProject.Menu;
 using TheKennelProject.MockData;
 using TheKennelProject.Rooms;
@@ -42,6 +42,7 @@ namespace TheKennelProject
 
             //Customers
             builder.RegisterType<Customer>().As<ICustomer>();
+            builder.RegisterType<CustomerManager>().As<ICustomerManager>();
 
             //Menu
             builder.RegisterType<MainMenu>().As<IMainMenu>();

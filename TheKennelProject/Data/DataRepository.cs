@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheKennelProject.Customers;
 using TheKennelProject.Dogs;
 using TheKennelProject.Rooms;
 
@@ -46,6 +47,11 @@ namespace TheKennelProject.Data
         public void SaveDog(IDog dog)
         {
             Db.Dogs.Add(dog);
+        }
+
+        public void SaveCustomer(ICustomer customer)
+        {
+            Db.Customers.Add(customer);
         }
     }
 }

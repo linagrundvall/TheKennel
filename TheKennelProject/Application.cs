@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheKennelProject.Data;
-using TheKennelProject.Entities;
 using Autofac;
 using TheKennelProject.MockData;
 using TheKennelProject.Menu;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TheKennelProject.Customers;
 using TheKennelProject.Dogs;
 using TheKennelProject.Rooms;
 
@@ -15,5 +16,6 @@ namespace TheKennelProject.Data
         IRoom GetRoomByRoomNumber(string roomNumber);
         IDog GetDogByName(string name);
         void SaveDog(IDog dog);
+        void SaveCustomer(ICustomer customer);
     }
 }

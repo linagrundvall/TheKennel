@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheKennelProject.Data;
-using TheKennelProject.Entities;
 using TheKennelProject.Rooms;
 using TheKennelProject.Rooms.RoomProperties;
 
@@ -26,18 +25,19 @@ namespace TheKennelProject.MockData
                 room.RoomNumber = i.ToString();
                 room.Price = i * 100;
 
-                if (i % 2 == 0)
-                {
-                    IRoomProperty petsAllowed = new PetsAllowed();
-                    petsAllowed.TrueOrFalse = true;
-                    room.RoomProperties.Add(petsAllowed);
-                }
-                else
-                {
-                    IRoomProperty smokingAllowed = new SmokingAllowed();
-                    smokingAllowed.TrueOrFalse = true;
-                    room.RoomProperties.Add(smokingAllowed);
-                }
+                //if (i % 2 == 0)
+                //{
+                //    IRoomProperty petsAllowed = new PetsAllowed();
+                //    petsAllowed.TrueOrFalse = true;
+                //    room.RoomProperties.Add(petsAllowed);
+                //}
+                //else
+                //{
+                //    IRoomProperty smokingAllowed = new SmokingAllowed();
+                //    smokingAllowed.TrueOrFalse = true;
+                //    room.RoomProperties.Add(smokingAllowed);
+                //}
+
                 Db.Rooms.Add(room);
             }
         }

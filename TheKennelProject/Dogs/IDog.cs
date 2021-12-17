@@ -7,5 +7,6 @@ namespace TheKennelProject.Dogs
         Guid ID { get; set; }
         string Name { get; set; }
         string Notes { get; set; }
+        public bool IsCheckedIn { get; set; }
     }
 }
