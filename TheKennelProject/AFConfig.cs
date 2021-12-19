@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using TheKennelProject.Bookings;
 using TheKennelProject.Customers;
 using TheKennelProject.Data;
 using TheKennelProject.Dogs;
@@ -31,6 +32,10 @@ namespace TheKennelProject
 
             //Repository
             builder.RegisterType<DataRepository>().As<IDataRepository>();
+
+            //Booking
+            builder.RegisterType<Booking>().As<IBooking>();
+            builder.RegisterType<BookingManager>().As<IBookingManager>();
 
             //Dogs
             builder.RegisterType<Dog>().As<IDog>();

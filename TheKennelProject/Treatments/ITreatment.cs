@@ -11,5 +11,6 @@ namespace TheKennelProject.Treatments
         public string Name { get; }
         public string Description { get; }
         public bool TrueOrFalse { get; set; }
+        public decimal Price { get; set; }
     }
 }

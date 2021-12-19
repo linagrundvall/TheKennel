@@ -7,5 +7,8 @@ namespace TheKennelProject.MockData
         IDBUsingLists Db { get; set; }
 
         void GenerateRooms();
+        void MakeCustomers();
+        void MakeDogs();
+        void GeneratePrice();
     }
 }

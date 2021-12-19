@@ -13,5 +13,6 @@ namespace TheKennelProject.Treatments
         public string Description => "The dogs claws are being cut.";
 
         public bool TrueOrFalse { get; set; }
+        public decimal Price { get; set; }
     }
 }

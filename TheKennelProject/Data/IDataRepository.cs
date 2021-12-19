@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using TheKennelProject.Bookings;
 using TheKennelProject.Customers;
 using TheKennelProject.Dogs;
 using TheKennelProject.Rooms;
+using TheKennelProject.Treatments;
 
 namespace TheKennelProject.Data
 {
@@ -16,9 +18,14 @@ namespace TheKennelProject.Data
         IRoom GetRoomByGuid(Guid guid);
         IRoom GetRoomByRoomNumber(string roomNumber);
         IDog GetDogByName(string name);
+        IDog GetDogByOwnersPersonalID(string personalIdentificationNumber);
         void SaveDog(IDog dog);
         void SaveCustomer(ICustomer customer);
         List<ICustomer> GetAllCustomers();
         List<IDog> GetAllDogs();
+        List<IDog> GetCurrentDogs();
+        List<IBooking> GetAllBookings();
+        List<ITreatment> GetAllTreatments();
+        //List<ICustomer> GetCustomersWithDogs();
     }
 }

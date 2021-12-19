@@ -51,9 +51,34 @@ namespace TheKennelProject.Customers
             Console.WriteLine("");
         }
 
+        public void ListCustomersWithDogs()
+        {
+            var customers = Db.GetAllCustomers();
+            var dogs = Db.GetAllDogs();
+            
+            Console.WriteLine("");
+
+            foreach (var customer in customers)
+            {
+                Console.WriteLine(customer.FirstName + " " + customer.LastName);
+
+                //var dogs = Db.GetDogByOwnersPersonalID();
+                //var dogs = Db.GetDogByOwnersPersonalID(customer.PersonalIdentificationNumber);
+                foreach (var dog in dogs)
+                {
+                    if (dog.OwnersPersonalID == customer.PersonalIdentificationNumber)
+                    {
+                        Console.WriteLine(" is the owner of " + dog.Name);
+                    }
+                }
+
+                Console.WriteLine("");
+            }
+            Console.WriteLine("");
+        }
+
         public void ShowCustomer()
         {
-
             Console.WriteLine(value: "Please enter personal identification number.");
             ICustomer customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
             

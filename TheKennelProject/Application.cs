@@ -24,7 +24,10 @@ namespace TheKennelProject
         }
         public void Run()
         {
+            MyMockData.GeneratePrice();
             MyMockData.GenerateRooms();
+            MyMockData.MakeCustomers();
+            MyMockData.MakeDogs();
 
             while (true)
             {

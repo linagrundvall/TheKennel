@@ -10,6 +10,7 @@ namespace TheKennelProject.Dogs
     class Dog : IDog
     {
         public Guid ID { get; set; }
+        public string OwnersPersonalID { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
         public bool IsCheckedIn { get; set; }
@@ -19,7 +20,7 @@ namespace TheKennelProject.Dogs
         public Dog()
         {
             ID = Guid.NewGuid();
-            Treatments = new List<ITreatment>();
+            //Treatments = new List<ITreatment>();
             CurrentDogs = new List<IDog>();
         }
     }

@@ -6,5 +6,6 @@ namespace TheKennelProject.Customers
     {
         void RegisterCustomer();
         void ListCustomers();
+        void ListCustomersWithDogs();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheKennelProject.Bookings;
 using TheKennelProject.Customers;
 using TheKennelProject.Dogs;
 using TheKennelProject.Rooms;
@@ -34,9 +35,10 @@ namespace TheKennelProject.Menu
             Console.WriteLine(value: "3. Register special treatment for dog");
             Console.WriteLine(value: "4. Check in dog");
             Console.WriteLine(value: "5. Check out dog");
-            Console.WriteLine(value: "6. List customers");
-            Console.WriteLine(value: "7. List dogs");
-            Console.WriteLine(value: "8. List current dogs");
+            Console.WriteLine(value: "6. List registered customers");
+            Console.WriteLine(value: "7. List registered customers with their dogs");
+            Console.WriteLine(value: "8. List registered dogs");
+            Console.WriteLine(value: "9. List current dogs with their owners");
             Console.WriteLine(value: "");
             Console.WriteLine(value: "********************************************");
         }
@@ -66,6 +68,8 @@ namespace TheKennelProject.Menu
                 case ConsoleKey.NumPad5:
                     DogManager.CheckOutDog();
 
+                    BookingManager.GetReceipt();
+                    Console.WriteLine("Kvitto");
                     break;
                 case ConsoleKey.D6:
                 case ConsoleKey.NumPad6:
@@ -73,11 +77,15 @@ namespace TheKennelProject.Menu
                     break;
                 case ConsoleKey.D7:
                 case ConsoleKey.NumPad7:
-                    DogManager.ListDogs();
+                    CustomerManager.ListCustomersWithDogs();
                     break;
                 case ConsoleKey.D8:
                 case ConsoleKey.NumPad8:
-                    Console.WriteLine("List current animals");
+                    DogManager.ListDogs();
+                    break;
+                case ConsoleKey.D9:
+                case ConsoleKey.NumPad9:
+                    DogManager.ListCurrentDogs();
                     break;
                 default:
                     Console.WriteLine(value: "Unknown command. Please try again.");

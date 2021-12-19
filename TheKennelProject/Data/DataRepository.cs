@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheKennelProject.Bookings;
 using TheKennelProject.Customers;
 using TheKennelProject.Dogs;
 using TheKennelProject.Rooms;
+using TheKennelProject.Treatments;
 
 namespace TheKennelProject.Data
 {
@@ -48,6 +50,11 @@ namespace TheKennelProject.Data
             return Db.Dogs.Where(d => d.Name == name).FirstOrDefault();
         }
 
+        public IDog GetDogByOwnersPersonalID(string personalIdentificationNumber)
+        {
+            return Db.Dogs.Where(d => d.OwnersPersonalID == personalIdentificationNumber).FirstOrDefault();
+        }
+
         public void SaveDog(IDog dog)
         {
             Db.Dogs.Add(dog);
@@ -63,10 +70,34 @@ namespace TheKennelProject.Data
             return Db.Dogs.ToList();
         }
 
+        public List<IDog> GetCurrentDogs()
+        {
+            return Db.Dogs.Where(d => d.IsCheckedIn == true).ToList();
+        }
+
         public List<ICustomer> GetAllCustomers()
         {
             return Db.Customers.ToList();
         }
 
+        public List<IBooking> GetAllBookings()
+        {
+            return Db.Bookings.ToList();
+        }
+
+        public List<ITreatment> GetAllTreatments()
+        {
+            return Db.Treatments.ToList();
+        }
+
+        //public Booking GetBookingPrice()
+        //{
+        //    return Db.Bookings.
+        //}
+
+        //public List<ICustomer> GetCustomersWithDogs()
+        //{
+        //    return 
+        //}
     }
 }

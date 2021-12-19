@@ -17,12 +17,16 @@ namespace TheKennelProject.Dogs
         }
         public void RegisterDog()
         {
+            IDog dog = DogFactory.Create();
+            
             // TODO: Split input into another class/method?
             Console.WriteLine(value: "Please enter personal identification number.");
-            ICustomer customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
-            // TODO: Koppla customerPID till dog
+            dog.OwnersPersonalID = Console.ReadLine();
+            
+            
+            //ICustomer customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
 
-            IDog dog = DogFactory.Create();
+            // TODO: Flytta personnummer till egen klass?
 
             Console.WriteLine(value: "Please enter the dogs name.");
             dog.Name = Console.ReadLine();
@@ -72,6 +76,7 @@ namespace TheKennelProject.Dogs
             var userInput = Console.ReadKey(intercept: true).Key;
             switch (userInput)
             {
+                //TODO: Ta ut metoderna i nya metoder
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
                     ITreatment cutClaws = new CutClaws();
@@ -120,6 +125,7 @@ namespace TheKennelProject.Dogs
             Console.WriteLine(value: "");
             Console.WriteLine("The dog has been checked out");
             Console.WriteLine(value: "");
+
             Console.WriteLine("Here is the receipt:");
         }
 
@@ -134,5 +140,29 @@ namespace TheKennelProject.Dogs
             }
             Console.WriteLine("");
         }
+
+        public void ListCurrentDogs()
+        {
+            var dogs = Db.GetCurrentDogs();
+            var customers = Db.GetAllCustomers();
+
+            Console.WriteLine("");
+
+            foreach (var dog in dogs)
+            {
+                Console.WriteLine(dog.Name);
+
+                foreach (var customer in customers)
+                {
+                    if (customer.PersonalIdentificationNumber == dog.OwnersPersonalID)
+                    {
+                        Console.WriteLine(" and its owner " + customer.FirstName + " " + customer.LastName);
+                        Console.WriteLine("");
+                    }
+                }
+            }
+            Console.WriteLine("");
+        }
     }
 }
+

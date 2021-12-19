@@ -7,5 +7,6 @@
         void CheckInDog();
         void CheckOutDog();
         void ListDogs();
+        void ListCurrentDogs();
     }
 }
