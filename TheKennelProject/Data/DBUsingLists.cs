@@ -7,7 +7,7 @@ using TheKennelProject.Bookings;
 using TheKennelProject.Customers;
 using TheKennelProject.Dogs;
 using TheKennelProject.Rooms;
-using TheKennelProject.Treatments;
+using TheKennelProject.AnimalTreatments;
 
 namespace TheKennelProject.Data
 {

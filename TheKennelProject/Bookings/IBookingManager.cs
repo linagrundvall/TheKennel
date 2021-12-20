@@ -6,7 +6,8 @@ namespace TheKennelProject.Bookings
     {
         IDataRepository Db { get; set; }
 
-        //void GetReceipt();
+        void GetReceipt();
         void ListBookings();
+        //void ListBookingByPersonalID()
     }
 }

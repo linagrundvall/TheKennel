@@ -68,7 +68,7 @@ namespace TheKennelProject.Menu
                 case ConsoleKey.NumPad5:
                     DogManager.CheckOutDog();
 
-                    BookingManager.GetReceipt();
+                    //BookingManager.GetReceipt();
                     Console.WriteLine("Kvitto");
                     break;
                 case ConsoleKey.D6:

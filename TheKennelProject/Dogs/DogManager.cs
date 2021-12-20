@@ -1,9 +1,10 @@
 ﻿using System;
 using TheKennelProject.Data;
 using TheKennelProject.Factories;
-using TheKennelProject.Treatments;
+using TheKennelProject.AnimalTreatments;
 using TheKennelProject.Dogs;
 using TheKennelProject.Customers;
+using System.Collections.Generic;
 
 namespace TheKennelProject.Dogs
 {
@@ -34,28 +35,6 @@ namespace TheKennelProject.Dogs
             Console.WriteLine(value: "Please enter any further notes regarding the dog.");
             dog.Notes = Console.ReadLine();
 
-            Console.WriteLine(value: "Do you want the dog to have any treatments?");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "1. Yes");
-            Console.WriteLine(value: "2. No");
-            Console.WriteLine(value: "");
-            
-            var userInput = Console.ReadKey(intercept: true).Key;
-            switch (userInput)
-            {
-                case ConsoleKey.D1:
-                case ConsoleKey.NumPad1:
-                    RegisterDogTreatment();
-                    break;
-                case ConsoleKey.D2:
-                case ConsoleKey.NumPad2:
-                    Console.WriteLine("No treatment today");
-                    break;
-                default:
-                    Console.WriteLine(value: "Unknown command. Please try again.");
-                    break;
-            }
-
             Db.SaveDog(dog);
             Console.WriteLine("Dog registered");
             Console.WriteLine(value: "");
@@ -79,30 +58,29 @@ namespace TheKennelProject.Dogs
                 //TODO: Ta ut metoderna i nya metoder
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    ITreatment cutClaws = new CutClaws();
-                    cutClaws.TrueOrFalse = true;
-                    //dog.Treatments.Add(cutClaws);
-
+                    var treatments = new List<ITreatment>();
+                    ITreatment wash = new Wash();
+                    wash.TrueOrFalse = true;
+                    dog.Treatments.Add(wash);
                     Console.WriteLine("Treatment registered");
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    //ITreatment wash = new Wash();
-                    //wash.TrueOrFalse = true;
-                    //dog.Treatments.Add(wash);
+                    var treatments2 = new List<ITreatment>();
+                    ITreatment cutClaws = new CutClaws();
+                    cutClaws.TrueOrFalse = true;
+                    dog.Treatments.Add(cutClaws);
                     Console.WriteLine("Treatment registered");
                     break;
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
-
                     Console.WriteLine("No treatment today");
                     break;
                 default:
                     Console.WriteLine(value: "Unknown command. Please try again.");
                     break;
             }
-            Db.SaveDog(dog);
-            Console.WriteLine("Treatment registered");
+            //Db.SaveDog(dog);
             Console.WriteLine(value: "");
         }
         public void CheckInDog()

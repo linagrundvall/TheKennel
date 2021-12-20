@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheKennelProject.Treatments;
+using TheKennelProject.AnimalTreatments;
+
 
 namespace TheKennelProject.Dogs
 {
@@ -20,7 +21,7 @@ namespace TheKennelProject.Dogs
         public Dog()
         {
             ID = Guid.NewGuid();
-            //Treatments = new List<ITreatment>();
+            Treatments = new List<ITreatment>();
             CurrentDogs = new List<IDog>();
         }
     }

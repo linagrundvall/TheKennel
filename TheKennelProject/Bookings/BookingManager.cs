@@ -20,7 +20,6 @@ namespace TheKennelProject.Bookings
         {
             //var List<IRoom> rooms = Db.GetAllRooms();
             var bookings = Db.GetAllBookings();
-            var dogs = Db.GetAllDogs();
             
 
             //foreach (var dog in dogs)
@@ -39,12 +38,16 @@ namespace TheKennelProject.Bookings
         //                Console.WriteLine(property.Name);
         //                Console.WriteLine(property.TrueOrFalse);
         //            }
-}
 
-//public void GetReceipt()
-//        {
-//         
-        
-//    }
+        //public void ListBookingByPersonalID()
+        //{
+
+
+        //}
+        public void GetReceipt()
+        {
+
+
+        }
     }
 }

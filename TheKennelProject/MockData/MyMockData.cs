@@ -9,7 +9,7 @@ using TheKennelProject.Data;
 using TheKennelProject.Dogs;
 using TheKennelProject.Rooms;
 using TheKennelProject.Rooms.RoomProperties;
-using TheKennelProject.Treatments;
+using TheKennelProject.AnimalTreatments;
 
 namespace TheKennelProject.MockData
 {
