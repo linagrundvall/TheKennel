@@ -5,6 +5,8 @@ using TheKennelProject.AnimalTreatments;
 using TheKennelProject.Dogs;
 using TheKennelProject.Customers;
 using System.Collections.Generic;
+using System.Linq;
+using TheKennelProject.Bookings;
 
 namespace TheKennelProject.Dogs
 {
@@ -23,9 +25,6 @@ namespace TheKennelProject.Dogs
             // TODO: Split input into another class/method?
             Console.WriteLine(value: "Please enter personal identification number.");
             dog.OwnersPersonalID = Console.ReadLine();
-            
-            
-            //ICustomer customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
 
             // TODO: Flytta personnummer till egen klass?
 
@@ -35,7 +34,11 @@ namespace TheKennelProject.Dogs
             Console.WriteLine(value: "Please enter any further notes regarding the dog.");
             dog.Notes = Console.ReadLine();
 
+            IBooking booking = BookingFactory.Create();
+            dog.BookingID = booking.ID;
+
             Db.SaveDog(dog);
+            Db.SaveBooking(booking);
             Console.WriteLine("Dog registered");
             Console.WriteLine(value: "");
         }
@@ -98,13 +101,47 @@ namespace TheKennelProject.Dogs
         {
             // TODO: Break out into different methods?
             Console.WriteLine(value: "Please enter the name of the dog");
+            
             IDog dog = Db.GetDogByName(Console.ReadLine());
             dog.IsCheckedIn = false;
             Console.WriteLine(value: "");
             Console.WriteLine("The dog has been checked out");
             Console.WriteLine(value: "");
 
-            Console.WriteLine("Here is the receipt:");
+            
+
+            //TODO: Lägg denna i BookingManager?
+            var treatments = new List<ITreatment>();
+            var booking = new Booking();
+            
+            
+            var bookingPrice = booking.Price;
+            
+            if (dog.Treatments.Count > 0)
+            {
+                //if (dog.Treatments.Contains(ITreatment Wash))
+                ////Wash.TrueOrFalse == true
+                ////treatments.CutClaws = true
+                //{
+                //    var totalPrice = bookingPrice + treatments.Wash.Price;
+                //}
+
+                //if (dog.Treatments.Contains(ITreatment CutClaws))
+                //{
+                //    var totalPrice = bookingPrice + treatments.Wash.Price;
+                //}
+
+                Console.WriteLine("The total for the dogs stay is " /*+ totalPrice*/) ;
+            }
+            else
+            {
+                Console.WriteLine("The total for the dogs stay is " + bookingPrice + ".");
+            }
+            Console.WriteLine("Hey");
+            //var treatments = new List<ITreatment>();
+            //ITreatment wash = new Wash();
+            //wash.TrueOrFalse = true;
+            //dog.Treatments.Add(wash);
         }
 
         public void ListDogs()

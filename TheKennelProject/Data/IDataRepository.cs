@@ -21,6 +21,7 @@ namespace TheKennelProject.Data
         IDog GetDogByOwnersPersonalID(string personalIdentificationNumber);
         void SaveDog(IDog dog);
         void SaveCustomer(ICustomer customer);
+        void SaveBooking(IBooking booking);
         List<ICustomer> GetAllCustomers();
         List<IDog> GetAllDogs();
         List<IDog> GetCurrentDogs();

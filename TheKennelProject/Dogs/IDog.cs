@@ -10,7 +10,8 @@ namespace TheKennelProject.Dogs
         string OwnersPersonalID { get; set; }
         string Name { get; set; }
         string Notes { get; set; }
-        public bool IsCheckedIn { get; set; }
+        bool IsCheckedIn { get; set; }
+        Guid BookingID { get; set; }
         List<ITreatment> Treatments { get; set; }
     }
 }

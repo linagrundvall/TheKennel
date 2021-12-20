@@ -15,6 +15,7 @@ namespace TheKennelProject.Dogs
         public string Name { get; set; }
         public string Notes { get; set; }
         public bool IsCheckedIn { get; set; }
+        public Guid BookingID { get; set; }
         public List<ITreatment> Treatments { get; set; }
         public List<IDog> CurrentDogs { get; set; }
 

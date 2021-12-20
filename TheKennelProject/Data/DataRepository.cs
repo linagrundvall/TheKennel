@@ -65,6 +65,11 @@ namespace TheKennelProject.Data
             Db.Customers.Add(customer);
         }
 
+        public void SaveBooking(IBooking booking)
+        {
+            Db.Bookings.Add(booking);
+        }
+
         public List<IDog> GetAllDogs()
         {
             return Db.Dogs.ToList();
