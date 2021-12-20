@@ -103,22 +103,47 @@ namespace TheKennelProject.Dogs
             Console.WriteLine(value: "Please enter the name of the dog");
             
             IDog dog = Db.GetDogByName(Console.ReadLine());
-            dog.IsCheckedIn = false;
             Console.WriteLine(value: "");
             Console.WriteLine("The dog has been checked out");
             Console.WriteLine(value: "");
 
-            
-
             //TODO: Lägg denna i BookingManager?
-            var treatments = new List<ITreatment>();
-            var booking = new Booking();
-            
-            
-            var bookingPrice = booking.Price;
-            
-            if (dog.Treatments.Count > 0)
+
+            var bookings = Db.GetAllBookings();
+            var treatments = dog.Treatments;
+            var totalPrice = 0.0;
+            foreach (var treatment in treatments)
             {
+                if (treatment.Name == "Wash")
+                {
+                    totalPrice += Db.GetTreatmentPrice(treatment);
+                }
+                else if (treatment.Name == "CutClaws")
+                {
+                    totalPrice += Db.GetTreatmentPrice(treatment);
+                }
+            }
+            
+            foreach (var booking in bookings)
+            {
+                if (booking.ID == dog.BookingID || dog.IsCheckedIn == true)
+                {
+                    totalPrice += booking.Price;
+
+                    Console.WriteLine("Total price is: " + totalPrice + " kr");
+                }
+                else
+                {
+                    Console.WriteLine("Sorry. The dog is not here.");
+                }
+
+            }
+
+            dog.IsCheckedIn = false;
+            Console.WriteLine("Hey");
+
+            //if (dog.Treatments.Count > 0)
+            //{
                 //if (dog.Treatments.Contains(ITreatment Wash))
                 ////Wash.TrueOrFalse == true
                 ////treatments.CutClaws = true
@@ -131,13 +156,6 @@ namespace TheKennelProject.Dogs
                 //    var totalPrice = bookingPrice + treatments.Wash.Price;
                 //}
 
-                Console.WriteLine("The total for the dogs stay is " /*+ totalPrice*/) ;
-            }
-            else
-            {
-                Console.WriteLine("The total for the dogs stay is " + bookingPrice + ".");
-            }
-            Console.WriteLine("Hey");
             //var treatments = new List<ITreatment>();
             //ITreatment wash = new Wash();
             //wash.TrueOrFalse = true;

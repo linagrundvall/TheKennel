@@ -22,6 +22,7 @@ namespace TheKennelProject.Data
         void SaveDog(IDog dog);
         void SaveCustomer(ICustomer customer);
         void SaveBooking(IBooking booking);
+        double GetTreatmentPrice(ITreatment dogTreatment);
         List<ICustomer> GetAllCustomers();
         List<IDog> GetAllDogs();
         List<IDog> GetCurrentDogs();

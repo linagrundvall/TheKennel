@@ -95,6 +95,19 @@ namespace TheKennelProject.Data
             return Db.Treatments.ToList();
         }
 
+        public double GetTreatmentPrice(ITreatment dogTreatment)
+        {
+            var treatments = GetAllTreatments();
+            foreach (var treatment in treatments)
+            {
+                if (treatment.Name == dogTreatment.Name)
+                {
+                    return treatment.Price;
+                }
+            }
+            return 0.0;
+        }
+
         //public Booking GetBookingPrice()
         //{
         //    return Db.Bookings.

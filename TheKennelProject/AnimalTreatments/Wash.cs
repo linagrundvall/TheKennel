@@ -13,6 +13,6 @@ namespace TheKennelProject.AnimalTreatments
         public string Description => "The dog is being washed.";
 
         public bool TrueOrFalse { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
     }
 }
