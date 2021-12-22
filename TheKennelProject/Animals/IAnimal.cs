@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using TheKennelProject.AnimalTreatments;
 
-namespace TheKennelProject.Dogs
+namespace TheKennelProject.Animals
 {
-    interface IDog
+    interface IAnimal
     {
+        Guid BookingID { get; set; }
         Guid ID { get; set; }
-        string OwnersPersonalID { get; set; }
+        bool IsCheckedIn { get; set; }
         string Name { get; set; }
         string Notes { get; set; }
-        bool IsCheckedIn { get; set; }
-        Guid BookingID { get; set; }
+        string OwnersPersonalID { get; set; }
         List<ITreatment> Treatments { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using TheKennelProject.Data;
 
-namespace TheKennelProject.Customers
+namespace TheKennelProject.Persons
 {
     internal interface ICustomerManager
     {

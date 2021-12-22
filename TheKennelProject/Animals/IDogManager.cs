@@ -1,4 +1,4 @@
-﻿namespace TheKennelProject.Dogs
+﻿namespace TheKennelProject.Animals
 {
     internal interface IDogManager
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace TheKennelProject.Customers
+namespace TheKennelProject.Persons
 {
-    interface ICustomer
+    interface IPerson
     {
         string FirstName { get; set; }
         Guid ID { get; set; }

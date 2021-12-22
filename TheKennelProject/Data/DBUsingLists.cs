@@ -4,29 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheKennelProject.Bookings;
-using TheKennelProject.Customers;
-using TheKennelProject.Dogs;
-using TheKennelProject.Rooms;
 using TheKennelProject.AnimalTreatments;
+using TheKennelProject.Persons;
+using TheKennelProject.Animals;
 
 namespace TheKennelProject.Data
 {
     class DBUsingLists : IDBUsingLists
     {
-        public List<IRoom> Rooms { get; set; }
-
-        public List<IDog> Dogs { get; set; }
-        public List<ICustomer> Customers { get; set; }
-        public List<IBooking> Bookings { get; set; }
+        public List<IPerson> Customers { get; set; }
+        public List<IAnimal> Dogs { get; set; }
         public List<ITreatment> Treatments { get; set; }
+        public List<IBooking> Bookings { get; set; }
 
         public DBUsingLists()
         {
-            Rooms = new List<IRoom>();
-            Dogs = new List<IDog>();
-            Customers = new List<ICustomer>();
-            Bookings = new List<IBooking>();
+            Customers = new List<IPerson>();
+            Dogs = new List<IAnimal>();
             Treatments = new List<ITreatment>();
+            Bookings = new List<IBooking>();
         }
     }
 }

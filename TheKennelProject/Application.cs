@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TheKennelProject.Data;
 using Autofac;
 using TheKennelProject.MockData;
-using TheKennelProject.Menu;
+using TheKennelProject.Menus;
 
 namespace TheKennelProject
 {
@@ -14,9 +14,9 @@ namespace TheKennelProject
     {
         public IDBUsingLists Db { get; set; }
         public IMyMockData MyMockData { get; set; }
-        public IMainMenu MainMenu { get; set; }
+        public IMenu MainMenu { get; set; }
 
-        public Application(IMainMenu mainMenu, IDBUsingLists databaseUsingLists, IMyMockData myMockData)
+        public Application(IMenu mainMenu, IDBUsingLists databaseUsingLists, IMyMockData myMockData)
         {
             Db = databaseUsingLists;
             MyMockData = myMockData;
@@ -25,7 +25,6 @@ namespace TheKennelProject
         public void Run()
         {
             MyMockData.GeneratePrice();
-            MyMockData.GenerateRooms();
             MyMockData.MakeCustomers();
             MyMockData.MakeDogs();
 

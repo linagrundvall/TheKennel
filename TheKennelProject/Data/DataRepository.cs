@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheKennelProject.Bookings;
-using TheKennelProject.Customers;
-using TheKennelProject.Dogs;
-using TheKennelProject.Rooms;
 using TheKennelProject.AnimalTreatments;
+using TheKennelProject.Persons;
+using TheKennelProject.Animals;
 
 namespace TheKennelProject.Data
 {
@@ -20,76 +19,52 @@ namespace TheKennelProject.Data
         {
             Db = db;
         }
-        public ICustomer GetCustomerByPersonalIdNumber(string personalIdentificationNumber)
-        {
-            return Db.Customers.Where(c => c.PersonalIdentificationNumber == personalIdentificationNumber).FirstOrDefault();
-        }
 
-        public IRoom GetRoomByRoomNumber(string roomNumber)
-        {
-            return Db.Rooms.Where(r => r.RoomNumber == roomNumber).FirstOrDefault();
-        }
-
-        public IRoom GetRoomByGuid(Guid guid)
-        {
-            return Db.Rooms.Where(r => r.ID == guid).FirstOrDefault();
-        }
-
-        public List<IRoom> GetAllRooms()
-        {
-            return Db.Rooms.ToList();
-        }
-
-        public IRoom GetRoomByDog(IDog dog)
-        {
-            return Db.Rooms.Where(r => r.CurrentDogs.Contains(dog)).FirstOrDefault();
-        }
-
-        public IDog GetDogByName(string name)
-        {
-            return Db.Dogs.Where(d => d.Name == name).FirstOrDefault();
-        }
-
-        public IDog GetDogByOwnersPersonalID(string personalIdentificationNumber)
-        {
-            return Db.Dogs.Where(d => d.OwnersPersonalID == personalIdentificationNumber).FirstOrDefault();
-        }
-
-        public void SaveDog(IDog dog)
-        {
-            Db.Dogs.Add(dog);
-        }
-
-        public void SaveCustomer(ICustomer customer)
-        {
-            Db.Customers.Add(customer);
-        }
-
-        public void SaveBooking(IBooking booking)
-        {
-            Db.Bookings.Add(booking);
-        }
-
-        public List<IDog> GetAllDogs()
-        {
-            return Db.Dogs.ToList();
-        }
-
-        public List<IDog> GetCurrentDogs()
-        {
-            return Db.Dogs.Where(d => d.IsCheckedIn == true).ToList();
-        }
-
-        public List<ICustomer> GetAllCustomers()
+        #region Customer
+        public List<IPerson> GetAllCustomers()
         {
             return Db.Customers.ToList();
         }
 
-        public List<IBooking> GetAllBookings()
+        public IPerson GetCustomerByPersonalIdNumber(string personalIdentificationNumber)
         {
-            return Db.Bookings.ToList();
+            return Db.Customers.Where(c => c.PersonalIdentificationNumber == personalIdentificationNumber).FirstOrDefault();
         }
 
+        public void SaveCustomer(IPerson customer)
+        {
+            Db.Customers.Add(customer);
+        }
+        #endregion
+
+        #region Dogs
+        public List<IAnimal> GetAllDogs()
+        {
+            return Db.Dogs.ToList();
+        }
+
+        public List<IAnimal> GetCurrentDogs()
+        {
+            return Db.Dogs.Where(d => d.IsCheckedIn == true).ToList();
+        }
+
+        public IAnimal GetDogByName(string name)
+        {
+            return Db.Dogs.Where(d => d.Name == name).FirstOrDefault();
+        }
+
+        public IAnimal GetDogByOwnersPersonalID(string personalIdentificationNumber)
+        {
+            return Db.Dogs.Where(d => d.OwnersPersonalID == personalIdentificationNumber).FirstOrDefault();
+        }
+
+        public void SaveDog(IAnimal dog)
+        {
+            Db.Dogs.Add(dog);
+        }
+        #endregion
+
+        #region Treatments
         public List<ITreatment> GetAllTreatments()
         {
             return Db.Treatments.ToList();
@@ -107,16 +82,18 @@ namespace TheKennelProject.Data
             }
             return 0.0;
         }
+        #endregion
 
-        //public Booking GetBookingPrice()
-        //{
-        //    return Db.Bookings.
-        //}
+        #region Booking
+        public List<IBooking> GetAllBookings()
+        {
+            return Db.Bookings.ToList();
+        }
 
-
-        //public IBooking GetBookingByPersonalIdNumber(string personalIdentificationNumber)
-        //{
-        //    return Db.Bookings.Where(c => c.PersonalIdentificationNumber == personalIdentificationNumber).FirstOrDefault();
-        //}
+        public void SaveBooking(IBooking booking)
+        {
+            Db.Bookings.Add(booking);
+        }
+        #endregion
     }
 }

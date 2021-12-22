@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TheKennelProject.Data;
 using TheKennelProject.Factories;
+using TheKennelProject.Persons;
 
-namespace TheKennelProject.Customers
+namespace TheKennelProject.Persons
 {
     internal class CustomerManager : ICustomerManager
     {
@@ -18,8 +19,8 @@ namespace TheKennelProject.Customers
         }
         public void RegisterCustomer()
         {
+            IPerson customer = CustomerFactory.Create();
             // TODO: Split input into another class/method?
-            ICustomer customer = CustomerFactory.Create();
 
             Console.WriteLine(value: "Please enter personal identification number.");
             customer.PersonalIdentificationNumber = Console.ReadLine();
@@ -62,8 +63,6 @@ namespace TheKennelProject.Customers
             {
                 Console.WriteLine(customer.FirstName + " " + customer.LastName);
 
-                //var dogs = Db.GetDogByOwnersPersonalID();
-                //var dogs = Db.GetDogByOwnersPersonalID(customer.PersonalIdentificationNumber);
                 foreach (var dog in dogs)
                 {
                     if (dog.OwnersPersonalID == customer.PersonalIdentificationNumber)
@@ -71,7 +70,6 @@ namespace TheKennelProject.Customers
                         Console.WriteLine(" is the owner of " + dog.Name);
                     }
                 }
-
                 Console.WriteLine("");
             }
             Console.WriteLine("");
@@ -80,7 +78,7 @@ namespace TheKennelProject.Customers
         public void ShowCustomer()
         {
             Console.WriteLine(value: "Please enter personal identification number.");
-            ICustomer customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
+            IPerson customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
             
             Console.WriteLine(customer.FirstName + " " + customer.LastName);
             Console.WriteLine("");

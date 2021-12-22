@@ -5,13 +5,12 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
+using TheKennelProject.Animals;
 using TheKennelProject.Bookings;
-using TheKennelProject.Customers;
 using TheKennelProject.Data;
-using TheKennelProject.Dogs;
-using TheKennelProject.Menu;
+using TheKennelProject.Menus;
 using TheKennelProject.MockData;
-using TheKennelProject.Rooms;
+using TheKennelProject.Persons;
 
 namespace TheKennelProject
 {
@@ -38,49 +37,21 @@ namespace TheKennelProject
             builder.RegisterType<BookingManager>().As<IBookingManager>();
 
             //Dogs
-            builder.RegisterType<Dog>().As<IDog>();
+            builder.RegisterType<Dog>().As<IAnimal>();
             builder.RegisterType<DogManager>().As<IDogManager>();
 
-            //Rooms
-            builder.RegisterType<Room>().As<IRoom>();
-            builder.RegisterType<RoomManager>().As<IRoomManager>();
-
             //Customers
-            builder.RegisterType<Customer>().As<ICustomer>();
+            builder.RegisterType<Customer>().As<IPerson>();
             builder.RegisterType<CustomerManager>().As<ICustomerManager>();
 
-            //Menu
-            builder.RegisterType<MainMenu>().As<IMainMenu>();
+            //Main menu
+            builder.RegisterType<MainMenu>().As<IMenu>();
 
-            //Menu
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            //    .Where(Type i => i.Namespace.Contains(value: "Menu"))
-            //    .As(Type i => i.GetInterfaces()
-            //    .FirstOrDefault(Type n => n.Name == "I" + n.Name));
+            //Menu dog
+            builder.RegisterType<MenuDog>().As<IMenuDog>();
 
-            ////Animal menu
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            //    .Where(Type i => i.Namespace.Contains(value: "Animal_Menu"))
-            //    .As(Type i => i.GetInterfaces()
-            //    .FirstOrDefault(Type n => n.Name == "I" + i.Name));
-
-            ////Customer menu
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            //    .Where(Type i => i.Namespace.Contains(value: "Customer_Menu"))
-            //    .As(Type i => i.GetInterfaces()
-            //    .FirstOrDefault(Type n => n.Name == "I" + i.Name));
-
-            ////Main menu
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            //    .Where(Type i => i.Namespace.Contains(value: "Main_Menu"))
-            //    .As(Type i => i.GetInterfaces()
-            //    .FirstOrDefault(Type n => n.Name == "I" + i.Name));
-
-            ////Customers
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            //    .Where(Type i => i.Namespace.Contains(value: "Customer"))
-            //    .As(Type i => i.GetInterfaces()
-            //    .FirstOrDefault(Type n => n.Name == "I" + i.Name));
+            //Menu customer
+            builder.RegisterType<MenuCustomer>().As<IMenuCustomer>();
 
             ////Animals
             //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
@@ -88,13 +59,9 @@ namespace TheKennelProject
             //    .As(Type i => i.GetInterfaces()
             //    .FirstOrDefault(Type n => n.Name == "I" + i.Name));
 
-            //Data
-            //builder.RegisterType<DataRepository>().As<IDataRepository>().SingleInstance();
-
             ////Delegate factory
             //builder.RegisterType<MenuOptions>();
             //builder.RegisterType<Dog>().Keyed<IAnimal>(serviceKey: "Dog").InstancePerDependency();
-
 
             //Register one by one (D, exaple)
             //builder.RegisterType<Task>().As<ITask>();

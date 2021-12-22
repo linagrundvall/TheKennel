@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheKennelProject.Customers;
+using TheKennelProject.Persons;
 
 namespace TheKennelProject.Factories
 {
     class CustomerFactory
     {
-        public static ICustomer Create()
+        public static IPerson Create()
         {
             return new Customer();
         }

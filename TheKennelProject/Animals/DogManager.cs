@@ -2,31 +2,28 @@
 using TheKennelProject.Data;
 using TheKennelProject.Factories;
 using TheKennelProject.AnimalTreatments;
-using TheKennelProject.Dogs;
-using TheKennelProject.Customers;
 using System.Collections.Generic;
 using System.Linq;
 using TheKennelProject.Bookings;
+using TheKennelProject.Animals;
 
-namespace TheKennelProject.Dogs
+namespace TheKennelProject.Animals
 {
     internal class DogManager : IDogManager
     {
         public IDataRepository Db { get; set; }
-        
+
         public DogManager(IDataRepository db)
         {
             Db = db;
         }
         public void RegisterDog()
         {
-            IDog dog = DogFactory.Create();
-            
+            IAnimal dog = DogFactory.Create();
+
             // TODO: Split input into another class/method?
             Console.WriteLine(value: "Please enter personal identification number.");
             dog.OwnersPersonalID = Console.ReadLine();
-
-            // TODO: Flytta personnummer till egen klass?
 
             Console.WriteLine(value: "Please enter the dogs name.");
             dog.Name = Console.ReadLine();
@@ -46,7 +43,7 @@ namespace TheKennelProject.Dogs
         public void RegisterDogTreatment()
         {
             Console.WriteLine(value: "Please enter the dogs name.");
-            IDog dog = Db.GetDogByName(Console.ReadLine());
+            IAnimal dog = Db.GetDogByName(Console.ReadLine());
 
             Console.WriteLine(value: "What treatment is the dog having?");
             Console.WriteLine(value: "");
@@ -61,7 +58,7 @@ namespace TheKennelProject.Dogs
                 //TODO: Ta ut metoderna i nya metoder
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    var treatments = new List<ITreatment>();
+                    //var treatments = new List<ITreatment>();
                     ITreatment wash = new Wash();
                     wash.TrueOrFalse = true;
                     dog.Treatments.Add(wash);
@@ -69,7 +66,7 @@ namespace TheKennelProject.Dogs
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    var treatments2 = new List<ITreatment>();
+                    //var treatments2 = new List<ITreatment>();
                     ITreatment cutClaws = new CutClaws();
                     cutClaws.TrueOrFalse = true;
                     dog.Treatments.Add(cutClaws);
@@ -90,7 +87,7 @@ namespace TheKennelProject.Dogs
         {
             // TODO: Break out into different methods?
             Console.WriteLine(value: "Please enter the name of the dog");
-            IDog dog = Db.GetDogByName(Console.ReadLine());
+            IAnimal dog = Db.GetDogByName(Console.ReadLine());
             dog.IsCheckedIn = true;
             Console.WriteLine(value: "");
             Console.WriteLine("The dog has been checked in");
@@ -101,13 +98,11 @@ namespace TheKennelProject.Dogs
         {
             // TODO: Break out into different methods?
             Console.WriteLine(value: "Please enter the name of the dog");
-            
-            IDog dog = Db.GetDogByName(Console.ReadLine());
+
+            IAnimal dog = Db.GetDogByName(Console.ReadLine());
             Console.WriteLine(value: "");
             Console.WriteLine("The dog has been checked out");
             Console.WriteLine(value: "");
-
-            //TODO: Lägg denna i BookingManager?
 
             var bookings = Db.GetAllBookings();
             var treatments = dog.Treatments;
@@ -123,7 +118,7 @@ namespace TheKennelProject.Dogs
                     totalPrice += Db.GetTreatmentPrice(treatment);
                 }
             }
-            
+
             foreach (var booking in bookings)
             {
                 if (booking.ID == dog.BookingID || dog.IsCheckedIn == true)
@@ -140,26 +135,7 @@ namespace TheKennelProject.Dogs
             }
 
             dog.IsCheckedIn = false;
-            Console.WriteLine("Hey");
-
-            //if (dog.Treatments.Count > 0)
-            //{
-                //if (dog.Treatments.Contains(ITreatment Wash))
-                ////Wash.TrueOrFalse == true
-                ////treatments.CutClaws = true
-                //{
-                //    var totalPrice = bookingPrice + treatments.Wash.Price;
-                //}
-
-                //if (dog.Treatments.Contains(ITreatment CutClaws))
-                //{
-                //    var totalPrice = bookingPrice + treatments.Wash.Price;
-                //}
-
-            //var treatments = new List<ITreatment>();
-            //ITreatment wash = new Wash();
-            //wash.TrueOrFalse = true;
-            //dog.Treatments.Add(wash);
+            Console.WriteLine("");
         }
 
         public void ListDogs()

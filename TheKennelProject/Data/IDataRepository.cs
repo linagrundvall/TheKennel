@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using TheKennelProject.Bookings;
-using TheKennelProject.Customers;
-using TheKennelProject.Dogs;
-using TheKennelProject.Rooms;
 using TheKennelProject.AnimalTreatments;
+using TheKennelProject.Persons;
+using TheKennelProject.Animals;
 
 namespace TheKennelProject.Data
 {
@@ -12,22 +11,24 @@ namespace TheKennelProject.Data
     {
         IDBUsingLists Db { get; set; }
 
-        ICustomer GetCustomerByPersonalIdNumber(string personalIdentificationNumber);
-        List<IRoom> GetAllRooms();
-        IRoom GetRoomByDog(IDog dog);
-        IRoom GetRoomByGuid(Guid guid);
-        IRoom GetRoomByRoomNumber(string roomNumber);
-        IDog GetDogByName(string name);
-        IDog GetDogByOwnersPersonalID(string personalIdentificationNumber);
-        void SaveDog(IDog dog);
-        void SaveCustomer(ICustomer customer);
-        void SaveBooking(IBooking booking);
-        double GetTreatmentPrice(ITreatment dogTreatment);
-        List<ICustomer> GetAllCustomers();
-        List<IDog> GetAllDogs();
-        List<IDog> GetCurrentDogs();
-        List<IBooking> GetAllBookings();
+        //Customers
+        List<IPerson> GetAllCustomers();
+        IPerson GetCustomerByPersonalIdNumber(string personalIdentificationNumber);
+        void SaveCustomer(IPerson customer);
+
+        //Dogs
+        List<IAnimal> GetAllDogs();
+        List<IAnimal> GetCurrentDogs();
+        IAnimal GetDogByName(string name);
+        IAnimal GetDogByOwnersPersonalID(string personalIdentificationNumber);
+        void SaveDog(IAnimal dog);
+
+        //Treatment
         List<ITreatment> GetAllTreatments();
-        //List<ICustomer> GetCustomersWithDogs();
+        double GetTreatmentPrice(ITreatment dogTreatment);
+
+        //Booking
+        List<IBooking> GetAllBookings();
+        void SaveBooking(IBooking booking);
     }
 }

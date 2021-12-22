@@ -18,36 +18,7 @@ namespace TheKennelProject.Bookings
 
         public void ListBookings()
         {
-            //var List<IRoom> rooms = Db.GetAllRooms();
-            var bookings = Db.GetAllBookings();
-            
-
-            //foreach (var dog in dogs)
-            //{
-            //    foreach (var treatment in dog)
-            //    {
-            //        Console.WriteLine(treatment.Name);
-            //        Console.WriteLine(treatment.TrueOrFalse);
-            //    }
-            //}
-        }
-        //foreach (var room in rooms)
-        //        {
-        //            foreach (var property in room.RoomProperties)
-        //            {
-        //                Console.WriteLine(property.Name);
-        //                Console.WriteLine(property.TrueOrFalse);
-        //            }
-
-        //public void ListBookingByPersonalID()
-        //{
-
-
-        //}
-        public void GetReceipt()
-        {
-
-
+            Db.GetAllBookings();
         }
     }
 }

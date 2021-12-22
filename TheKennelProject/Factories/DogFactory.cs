@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheKennelProject.Dogs;
+using TheKennelProject.Animals;
 
 namespace TheKennelProject.Factories
 {
     static class DogFactory
     {
-        public static IDog Create()
+        public static IAnimal Create()
         {
             return new Dog();
         }
