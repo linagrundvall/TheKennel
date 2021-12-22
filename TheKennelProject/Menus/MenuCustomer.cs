@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheKennelProject.Animals;
 using TheKennelProject.Bookings;
+using TheKennelProject.Data;
 using TheKennelProject.Persons;
 
 namespace TheKennelProject.Menus
@@ -23,17 +24,17 @@ namespace TheKennelProject.Menus
         }
         public void Show()
         {
-            Console.WriteLine(value: "********************************************");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "          Welcome to the Kennel");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "********************************************");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "1. Register customer");
-            Console.WriteLine(value: "2. List registered customer");
-            Console.WriteLine(value: "3. List registered customer with their dogs");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "********************************************");
+            DataOutput.ToConsole("********************************************");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("          Welcome to the Kennel");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("********************************************");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("1. Register customer");
+            DataOutput.ToConsole("2. List registered customer");
+            DataOutput.ToConsole("3. List registered customer with their dogs");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("********************************************");
         }
 
         public void GetInput()
@@ -44,7 +45,7 @@ namespace TheKennelProject.Menus
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
                     CustomerManager.RegisterCustomer();
-
+                    CustomerManager.SaveCustomer();
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
@@ -55,7 +56,7 @@ namespace TheKennelProject.Menus
                     CustomerManager.ListCustomersWithDogs();
                     break;
                 default:
-                    Console.WriteLine(value: "Unknown command. Please try again.");
+                    DataOutput.ToConsole("Unknown command. Please try again.");
                     break;
             }
         }

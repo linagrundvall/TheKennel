@@ -17,71 +17,74 @@ namespace TheKennelProject.Persons
         {
             Db = db;
         }
+
+        IPerson customer = CustomerFactory.Create();
+
         public void RegisterCustomer()
         {
-            IPerson customer = CustomerFactory.Create();
-            // TODO: Split input into another class/method?
+            DataOutput.ToConsole("Please enter personal identification number.");
+            customer.PersonalIdentificationNumber = DataInput.FromConsole();
 
-            Console.WriteLine(value: "Please enter personal identification number.");
-            customer.PersonalIdentificationNumber = Console.ReadLine();
+            DataOutput.ToConsole("Please enter first name.");
+            customer.FirstName = DataInput.FromConsole();
 
-            Console.WriteLine(value: "Please enter first name.");
-            customer.FirstName = Console.ReadLine();
+            DataOutput.ToConsole("Please enter last name.");
+            customer.LastName = DataInput.FromConsole();
 
-            Console.WriteLine(value: "Please enter last name.");
-            customer.LastName = Console.ReadLine();
+            DataOutput.ToConsole("Please enter any further notes regarding the customer.");
+            customer.Notes = DataInput.FromConsole();
+        }
 
-            Console.WriteLine(value: "Please enter any further notes regarding the customer.");
-            customer.Notes = Console.ReadLine();
-
+        public void SaveCustomer()
+        {
             Db.SaveCustomer(customer);
-            Console.WriteLine("");
-            Console.WriteLine("Customer registered");
-            Console.WriteLine("");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("Registration succeeded!");
+            DataOutput.ToConsole("");
         }
 
         public void ListCustomers()
         {
             var customers = Db.GetAllCustomers();
-            Console.WriteLine("");
+            DataOutput.ToConsole("");
 
             foreach (var customer in customers)
             {
-                Console.WriteLine(customer.FirstName + " " + customer.LastName);
+                DataOutput.ToConsole(customer.FirstName + " " + customer.LastName);
             }
-            Console.WriteLine("");
+            DataOutput.ToConsole("");
         }
 
         public void ListCustomersWithDogs()
         {
             var customers = Db.GetAllCustomers();
             var dogs = Db.GetAllDogs();
-            
-            Console.WriteLine("");
+
+            DataOutput.ToConsole("");
 
             foreach (var customer in customers)
             {
-                Console.WriteLine(customer.FirstName + " " + customer.LastName);
+                DataOutput.ToConsole(customer.FirstName + " " + customer.LastName);
 
                 foreach (var dog in dogs)
                 {
                     if (dog.OwnersPersonalID == customer.PersonalIdentificationNumber)
                     {
-                        Console.WriteLine(" is the owner of " + dog.Name);
+                        DataOutput.ToConsole(" is the owner of " + dog.Name);
                     }
                 }
-                Console.WriteLine("");
+                DataOutput.ToConsole("");
             }
-            Console.WriteLine("");
+            DataOutput.ToConsole("");
         }
 
         public void ShowCustomer()
         {
-            Console.WriteLine(value: "Please enter personal identification number.");
-            IPerson customer = Db.GetCustomerByPersonalIdNumber(Console.ReadLine());
-            
-            Console.WriteLine(customer.FirstName + " " + customer.LastName);
-            Console.WriteLine("");
+            DataOutput.ToConsole("Please enter personal identification number.");
+            IPerson customer = Db.GetCustomerByPersonalIdNumber(DataInput.FromConsole());
+
+            DataOutput.ToConsole(customer.FirstName + " " + customer.LastName);
+            DataOutput.ToConsole("");
         }
     }
 }

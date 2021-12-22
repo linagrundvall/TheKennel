@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheKennelProject.Animals;
 using TheKennelProject.Bookings;
+using TheKennelProject.Data;
 using TheKennelProject.Persons;
 
 namespace TheKennelProject.Menus
@@ -24,20 +25,20 @@ namespace TheKennelProject.Menus
 
         public void Show()
         {
-            Console.WriteLine(value: "********************************************");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "          Welcome to the Kennel");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "********************************************");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "1. Register dog");
-            Console.WriteLine(value: "2. Register special treatment for dog");
-            Console.WriteLine(value: "3. Check in dog");
-            Console.WriteLine(value: "4. Check out dog");
-            Console.WriteLine(value: "5. List registered dogs");
-            Console.WriteLine(value: "6. List current dogs with their owners");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "********************************************");
+            DataOutput.ToConsole("********************************************");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("          Welcome to the Kennel");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("********************************************");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("1. Register dog");
+            DataOutput.ToConsole("2. Register special treatment for dog");
+            DataOutput.ToConsole("3. Check in dog");
+            DataOutput.ToConsole("4. Check out dog");
+            DataOutput.ToConsole("5. List registered dogs");
+            DataOutput.ToConsole("6. List current dogs with their owners");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("********************************************");
 
         }
 
@@ -49,6 +50,7 @@ namespace TheKennelProject.Menus
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
                     DogManager.RegisterDog();
+                    DogManager.SaveDog();
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
@@ -71,7 +73,7 @@ namespace TheKennelProject.Menus
                     DogManager.ListCurrentDogs();
                     break;
                 default:
-                    Console.WriteLine(value: "Unknown command. Please try again.");
+                    DataOutput.ToConsole("Unknown command. Please try again.");
                     break;
             }
         }

@@ -17,137 +17,156 @@ namespace TheKennelProject.Animals
         {
             Db = db;
         }
+
+        IAnimal dog = DogFactory.Create();
+
         public void RegisterDog()
         {
-            IAnimal dog = DogFactory.Create();
+            DataOutput.ToConsole("Please enter personal identification number.");
+            dog.OwnersPersonalID = DataInput.FromConsole();
 
-            // TODO: Split input into another class/method?
-            Console.WriteLine(value: "Please enter personal identification number.");
-            dog.OwnersPersonalID = Console.ReadLine();
+            DataOutput.ToConsole("Please enter the dogs name.");
+            dog.Name = DataInput.FromConsole();
 
-            Console.WriteLine(value: "Please enter the dogs name.");
-            dog.Name = Console.ReadLine();
+            DataOutput.ToConsole("Please enter any further notes regarding the dog.");
+            dog.Notes = DataInput.FromConsole();
+        }
 
-            Console.WriteLine(value: "Please enter any further notes regarding the dog.");
-            dog.Notes = Console.ReadLine();
-
+        public void SaveDog()
+        {
             IBooking booking = BookingFactory.Create();
             dog.BookingID = booking.ID;
 
             Db.SaveDog(dog);
             Db.SaveBooking(booking);
-            Console.WriteLine("Dog registered");
-            Console.WriteLine(value: "");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("Registration succeeded!");
+            DataOutput.ToConsole("");
         }
 
         public void RegisterDogTreatment()
         {
-            Console.WriteLine(value: "Please enter the dogs name.");
-            IAnimal dog = Db.GetDogByName(Console.ReadLine());
+            DataOutput.ToConsole("Please enter the dogs name.");
+            IAnimal dog = Db.GetDogByName(DataInput.FromConsole());
+            DataOutput.ToConsole("");
 
-            Console.WriteLine(value: "What treatment is the dog having?");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "1. Washing");
-            Console.WriteLine(value: "2. Cut claws");
-            Console.WriteLine(value: "3. No treatments today");
-            Console.WriteLine(value: "");
+            DataOutput.ToConsole("What treatment is the dog having?");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("1. Washing");
+            DataOutput.ToConsole("2. Cut claws");
+            DataOutput.ToConsole("3. No treatments today");
+            DataOutput.ToConsole("");
 
             var userInput = Console.ReadKey(intercept: true).Key;
             switch (userInput)
             {
-                //TODO: Ta ut metoderna i nya metoder
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    //var treatments = new List<ITreatment>();
-                    ITreatment wash = new Wash();
-                    wash.TrueOrFalse = true;
-                    dog.Treatments.Add(wash);
-                    Console.WriteLine("Treatment registered");
+                    AddWash(dog);
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    //var treatments2 = new List<ITreatment>();
-                    ITreatment cutClaws = new CutClaws();
-                    cutClaws.TrueOrFalse = true;
-                    dog.Treatments.Add(cutClaws);
-                    Console.WriteLine("Treatment registered");
+                    AddCutClaws(dog);
                     break;
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
-                    Console.WriteLine("No treatment today");
+                    DataOutput.ToConsole("No treatment today");
                     break;
                 default:
-                    Console.WriteLine(value: "Unknown command. Please try again.");
+                    DataOutput.ToConsole("Unknown command. Please try again.");
                     break;
             }
-            //Db.SaveDog(dog);
-            Console.WriteLine(value: "");
+            DataOutput.ToConsole("");
         }
+
+        public void AddCutClaws(IAnimal dog)
+        {
+            ITreatment cutClaws = new CutClaws();
+            cutClaws.TrueOrFalse = true;
+            dog.Treatments.Add(cutClaws);
+            DataOutput.ToConsole("Registration succeeded!");
+            DataOutput.ToConsole("");
+        }
+
+        public void AddWash(IAnimal dog)
+        {
+            ITreatment wash = new Wash();
+            wash.TrueOrFalse = true;
+            dog.Treatments.Add(wash);
+            DataOutput.ToConsole("Registration succeeded!");
+            DataOutput.ToConsole("");
+        }
+
         public void CheckInDog()
         {
-            // TODO: Break out into different methods?
-            Console.WriteLine(value: "Please enter the name of the dog");
-            IAnimal dog = Db.GetDogByName(Console.ReadLine());
+            DataOutput.ToConsole("Please enter the name of the dog");
+            IAnimal dog = Db.GetDogByName(DataInput.FromConsole());
             dog.IsCheckedIn = true;
-            Console.WriteLine(value: "");
-            Console.WriteLine("The dog has been checked in");
-            Console.WriteLine(value: "");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("Check in succeeded!");
+            DataOutput.ToConsole("");
         }
 
         public void CheckOutDog()
         {
-            // TODO: Break out into different methods?
-            Console.WriteLine(value: "Please enter the name of the dog");
+            DataOutput.ToConsole("Please enter the name of the dog");
+            IAnimal dog = Db.GetDogByName(DataInput.FromConsole());
 
-            IAnimal dog = Db.GetDogByName(Console.ReadLine());
-            Console.WriteLine(value: "");
-            Console.WriteLine("The dog has been checked out");
-            Console.WriteLine(value: "");
+            double totalPrice = GetPriceTreatments(dog) + GetPriceBooking(dog);
 
+            dog.IsCheckedIn = false;
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("Check out succeeded!");
+            DataOutput.ToConsole("Total price is: " + totalPrice + " kr");
+            DataOutput.ToConsole("");
+        }
+
+        public double GetPriceBooking(IAnimal dog)
+        {
             var bookings = Db.GetAllBookings();
-            var treatments = dog.Treatments;
-            var totalPrice = 0.0;
-            foreach (var treatment in treatments)
-            {
-                if (treatment.Name == "Wash")
-                {
-                    totalPrice += Db.GetTreatmentPrice(treatment);
-                }
-                else if (treatment.Name == "CutClaws")
-                {
-                    totalPrice += Db.GetTreatmentPrice(treatment);
-                }
-            }
-
+            var priceBooking = 0.0;
             foreach (var booking in bookings)
             {
                 if (booking.ID == dog.BookingID || dog.IsCheckedIn == true)
                 {
-                    totalPrice += booking.Price;
-
-                    Console.WriteLine("Total price is: " + totalPrice + " kr");
+                    priceBooking += booking.Price;
                 }
                 else
                 {
-                    Console.WriteLine("Sorry. The dog is not here.");
+                    DataOutput.ToConsole("Sorry. The dog is not here.");
                 }
-
             }
+            return priceBooking;
+        }
 
-            dog.IsCheckedIn = false;
-            Console.WriteLine("");
+        public double GetPriceTreatments(IAnimal dog)
+        {
+            var treatments = dog.Treatments;
+            var priceTreatments = 0.0;
+            foreach (var treatment in treatments)
+            {
+                if (treatment.Name == "Wash")
+                {
+                    priceTreatments += Db.GetTreatmentPrice(treatment);
+                }
+                else if (treatment.Name == "CutClaws")
+                {
+                    priceTreatments += Db.GetTreatmentPrice(treatment);
+                }
+            }
+            return priceTreatments;
         }
 
         public void ListDogs()
         {
             var dogs = Db.GetAllDogs();
-            Console.WriteLine("");
+            DataOutput.ToConsole("");
 
             foreach (var dog in dogs)
             {
-                Console.WriteLine(dog.Name);
+                DataOutput.ToConsole(dog.Name);
             }
-            Console.WriteLine("");
+            DataOutput.ToConsole("");
         }
 
         public void ListCurrentDogs()
@@ -155,22 +174,22 @@ namespace TheKennelProject.Animals
             var dogs = Db.GetCurrentDogs();
             var customers = Db.GetAllCustomers();
 
-            Console.WriteLine("");
+            DataOutput.ToConsole("");
 
             foreach (var dog in dogs)
             {
-                Console.WriteLine(dog.Name);
+                DataOutput.ToConsole(dog.Name);
 
                 foreach (var customer in customers)
                 {
                     if (customer.PersonalIdentificationNumber == dog.OwnersPersonalID)
                     {
-                        Console.WriteLine(" and its owner " + customer.FirstName + " " + customer.LastName);
-                        Console.WriteLine("");
+                        DataOutput.ToConsole(" and its owner " + customer.FirstName + " " + customer.LastName);
+                        DataOutput.ToConsole("");
                     }
                 }
             }
-            Console.WriteLine("");
+            DataOutput.ToConsole("");
         }
     }
 }

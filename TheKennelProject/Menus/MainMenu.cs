@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TheKennelProject.Animals;
 using TheKennelProject.Bookings;
+using TheKennelProject.Data;
 using TheKennelProject.Persons;
 
 namespace TheKennelProject.Menus
@@ -28,16 +29,16 @@ namespace TheKennelProject.Menus
 
         public void Show()
         {
-            Console.WriteLine(value: "********************************************");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "          Welcome to the Kennel");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "********************************************");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "1. Customer");
-            Console.WriteLine(value: "2. Dog");
-            Console.WriteLine(value: "");
-            Console.WriteLine(value: "********************************************");
+            DataOutput.ToConsole("********************************************");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("          Welcome to the Kennel");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("********************************************");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("1. Customer");
+            DataOutput.ToConsole("2. Dog");
+            DataOutput.ToConsole("");
+            DataOutput.ToConsole("********************************************");
         }
 
         public void GetInput()
@@ -56,7 +57,7 @@ namespace TheKennelProject.Menus
                     MenuForDog.GetInput();
                     break;
                 default:
-                    Console.WriteLine(value: "Unknown command. Please try again.");
+                    DataOutput.ToConsole("Unknown command. Please try again.");
                     break;
             }
         }
