@@ -4,13 +4,13 @@ using TheKennelProject.Persons;
 
 namespace TheKennelProject.Menus
 {
-    interface IMenuDog
+    interface IMenuPerson
     {
         IBookingManager BookingManager { get; set; }
-        ICustomerManager CustomerManager { get; set; }
-        IDogManager DogManager { get; set; }
+        IPersonManager PersonManager { get; set; }
+        IAnimalManager AnimalManager { get; set; }
 
-        void GetInput();
         void Show();
+        void GetInput();
     }
 }

@@ -10,16 +10,16 @@ using TheKennelProject.Persons;
 
 namespace TheKennelProject.Menus
 {
-    class MenuDog : IMenuDog
+    class MenuAnimal : IMenuAnimal
     {
-        public IDogManager DogManager { get; set; }
-        public ICustomerManager CustomerManager { get; set; }
+        public IAnimalManager AnimalManager { get; set; }
+        public IPersonManager PersonManager { get; set; }
         public IBookingManager BookingManager { get; set; }
 
-        public MenuDog(IDogManager dogManager, ICustomerManager customerManager, IBookingManager bookingManager)
+        public MenuAnimal(IAnimalManager animalManager, IPersonManager personManager, IBookingManager bookingManager)
         {
-            DogManager = dogManager;
-            CustomerManager = customerManager;
+            AnimalManager = animalManager;
+            PersonManager = personManager;
             BookingManager = bookingManager;
         }
 
@@ -31,15 +31,14 @@ namespace TheKennelProject.Menus
             DataOutput.ToConsole("");
             DataOutput.ToConsole("********************************************");
             DataOutput.ToConsole("");
-            DataOutput.ToConsole("1. Register dog");
-            DataOutput.ToConsole("2. Register special treatment for dog");
-            DataOutput.ToConsole("3. Check in dog");
-            DataOutput.ToConsole("4. Check out dog");
-            DataOutput.ToConsole("5. List registered dogs");
-            DataOutput.ToConsole("6. List current dogs with their owners");
+            DataOutput.ToConsole("1. Register animal");
+            DataOutput.ToConsole("2. Register special treatment for animal");
+            DataOutput.ToConsole("3. Check in animal");
+            DataOutput.ToConsole("4. Check out animal");
+            DataOutput.ToConsole("5. List registered animals");
+            DataOutput.ToConsole("6. List current animals with their owners");
             DataOutput.ToConsole("");
             DataOutput.ToConsole("********************************************");
-
         }
 
         public void GetInput()
@@ -49,28 +48,28 @@ namespace TheKennelProject.Menus
             {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    DogManager.RegisterDog();
-                    DogManager.SaveDog();
+                    AnimalManager.RegisterAnimal();
+                    AnimalManager.SaveAnimal();
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    DogManager.RegisterDogTreatment();
+                    AnimalManager.RegisterAnimalTreatment();
                     break;
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
-                    DogManager.CheckInDog();
+                    AnimalManager.CheckInAnimal();
                     break;
                 case ConsoleKey.D4:
                 case ConsoleKey.NumPad4:
-                    DogManager.CheckOutDog();
+                    AnimalManager.CheckOutAnimal();
                     break;
                 case ConsoleKey.D5:
                 case ConsoleKey.NumPad5:
-                    DogManager.ListDogs();
+                    AnimalManager.ListAnimals();
                     break;
                 case ConsoleKey.D6:
                 case ConsoleKey.NumPad6:
-                    DogManager.ListCurrentDogs();
+                    AnimalManager.ListCurrentAnimals();
                     break;
                 default:
                     DataOutput.ToConsole("Unknown command. Please try again.");

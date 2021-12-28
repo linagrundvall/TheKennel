@@ -9,9 +9,7 @@ namespace TheKennelProject.AnimalTreatments
     class Wash : ITreatment
     {
         public string Name => "Wash";
-
         public string Description => "The animal is being washed.";
-
         public bool TrueOrFalse { get; set; }
         public double Price { get; set; }
     }

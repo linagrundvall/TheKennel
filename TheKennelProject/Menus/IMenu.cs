@@ -6,8 +6,8 @@ namespace TheKennelProject.Menus
 {
     interface IMenu
     {
-        IDogManager DogManager { get; set; }
-        ICustomerManager CustomerManager { get; set; }
+        IAnimalManager AnimalManager { get; set; }
+        IPersonManager PersonManager { get; set; }
         IBookingManager BookingManager { get; set; }
         void Show();
         void GetInput();

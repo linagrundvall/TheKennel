@@ -1,60 +1,61 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TheKennelProject.Bookings;
 using TheKennelProject.Data;
 using TheKennelProject.Factories;
 using TheKennelProject.AnimalTreatments;
-using System.Collections.Generic;
-using System.Linq;
-using TheKennelProject.Bookings;
-using TheKennelProject.Animals;
+using TheKennelProject.Menus;
 
 namespace TheKennelProject.Animals
 {
-    internal class DogManager : IDogManager
+    internal class AnimalManager : IAnimalManager
     {
         public IDataRepository Db { get; set; }
 
-        public DogManager(IDataRepository db)
+        public AnimalManager(IDataRepository db)
         {
             Db = db;
         }
 
-        IAnimal dog = DogFactory.Create();
+        IAnimal animal = DogFactory.Create();
 
-        public void RegisterDog()
+        public void RegisterAnimal()
         {
             DataOutput.ToConsole("Please enter personal identification number.");
-            dog.OwnersPersonalID = DataInput.FromConsole();
+            animal.OwnersPersonalID = DataInput.FromConsole();
 
-            DataOutput.ToConsole("Please enter the dogs name.");
-            dog.Name = DataInput.FromConsole();
+            DataOutput.ToConsole("Please enter the animals name.");
+            animal.Name = DataInput.FromConsole();
 
-            DataOutput.ToConsole("Please enter any further notes regarding the dog.");
-            dog.Notes = DataInput.FromConsole();
+            DataOutput.ToConsole("Please enter any further notes regarding the animal.");
+            animal.Notes = DataInput.FromConsole();
         }
 
-        public void SaveDog()
+        public void SaveAnimal()
         {
             IBooking booking = BookingFactory.Create();
-            dog.BookingID = booking.ID;
+            animal.BookingID = booking.ID;
 
-            Db.SaveDog(dog);
+            Db.SaveAnimal(animal);
             Db.SaveBooking(booking);
             DataOutput.ToConsole("");
             DataOutput.ToConsole("Registration succeeded!");
             DataOutput.ToConsole("");
         }
 
-        public void RegisterDogTreatment()
+        public void RegisterAnimalTreatment()
         {
-            DataOutput.ToConsole("Please enter the dogs name.");
-            IAnimal dog = Db.GetDogByName(DataInput.FromConsole());
+            DataOutput.ToConsole("Please enter the animals name.");
+            IAnimal animal = Db.GetAnimalByName(DataInput.FromConsole());
             DataOutput.ToConsole("");
 
-            DataOutput.ToConsole("What treatment is the dog having?");
+            DataOutput.ToConsole("What treatment is the animal having?");
             DataOutput.ToConsole("");
             DataOutput.ToConsole("1. Washing");
             DataOutput.ToConsole("2. Cut claws");
-            DataOutput.ToConsole("3. No treatments today");
             DataOutput.ToConsole("");
 
             var userInput = Console.ReadKey(intercept: true).Key;
@@ -62,15 +63,11 @@ namespace TheKennelProject.Animals
             {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    AddWash(dog);
+                    AddWash(animal);
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    AddCutClaws(dog);
-                    break;
-                case ConsoleKey.D3:
-                case ConsoleKey.NumPad3:
-                    DataOutput.ToConsole("No treatment today");
+                    AddCutClaws(animal);
                     break;
                 default:
                     DataOutput.ToConsole("Unknown command. Please try again.");
@@ -79,69 +76,69 @@ namespace TheKennelProject.Animals
             DataOutput.ToConsole("");
         }
 
-        public void AddCutClaws(IAnimal dog)
+        public void AddCutClaws(IAnimal animal)
         {
             ITreatment cutClaws = new CutClaws();
             cutClaws.TrueOrFalse = true;
-            dog.Treatments.Add(cutClaws);
+            animal.Treatments.Add(cutClaws);
             DataOutput.ToConsole("Registration succeeded!");
             DataOutput.ToConsole("");
         }
 
-        public void AddWash(IAnimal dog)
+        public void AddWash(IAnimal animal)
         {
             ITreatment wash = new Wash();
             wash.TrueOrFalse = true;
-            dog.Treatments.Add(wash);
+            animal.Treatments.Add(wash);
             DataOutput.ToConsole("Registration succeeded!");
             DataOutput.ToConsole("");
         }
 
-        public void CheckInDog()
+        public void CheckInAnimal()
         {
-            DataOutput.ToConsole("Please enter the name of the dog");
-            IAnimal dog = Db.GetDogByName(DataInput.FromConsole());
-            dog.IsCheckedIn = true;
+            DataOutput.ToConsole("Please enter the name of the animal");
+            IAnimal animal = Db.GetAnimalByName(DataInput.FromConsole());
+            animal.IsCheckedIn = true;
             DataOutput.ToConsole("");
             DataOutput.ToConsole("Check in succeeded!");
             DataOutput.ToConsole("");
         }
 
-        public void CheckOutDog()
+        public void CheckOutAnimal()
         {
-            DataOutput.ToConsole("Please enter the name of the dog");
-            IAnimal dog = Db.GetDogByName(DataInput.FromConsole());
+            DataOutput.ToConsole("Please enter the name of the animal");
+            IAnimal animal = Db.GetAnimalByName(DataInput.FromConsole());
 
-            double totalPrice = GetPriceTreatments(dog) + GetPriceBooking(dog);
+            double totalPrice = GetPriceTreatments(animal) + GetPriceBooking(animal);
 
-            dog.IsCheckedIn = false;
+            animal.IsCheckedIn = false;
             DataOutput.ToConsole("");
             DataOutput.ToConsole("Check out succeeded!");
             DataOutput.ToConsole("Total price is: " + totalPrice + " kr");
             DataOutput.ToConsole("");
         }
 
-        public double GetPriceBooking(IAnimal dog)
+        public double GetPriceBooking(IAnimal animal)
         {
             var bookings = Db.GetAllBookings();
             var priceBooking = 0.0;
             foreach (var booking in bookings)
             {
-                if (booking.ID == dog.BookingID || dog.IsCheckedIn == true)
+                if (booking.ID == animal.BookingID || animal.IsCheckedIn == true)
                 {
                     priceBooking += booking.Price;
                 }
                 else
                 {
-                    DataOutput.ToConsole("Sorry. The dog is not here.");
+                    DataOutput.ToConsole("Sorry. The animal is not here.");
                 }
             }
             return priceBooking;
         }
 
-        public double GetPriceTreatments(IAnimal dog)
+        public double GetPriceTreatments(IAnimal animal)
         {
-            var treatments = dog.Treatments;
+            var treatments = animal.Treatments;
             var priceTreatments = 0.0;
             foreach (var treatment in treatments)
             {
@@ -157,34 +154,34 @@ namespace TheKennelProject.Animals
             return priceTreatments;
         }
 
-        public void ListDogs()
+        public void ListAnimals()
         {
-            var dogs = Db.GetAllDogs();
+            var animals = Db.GetAllAnimals();
             DataOutput.ToConsole("");
 
-            foreach (var dog in dogs)
+            foreach (var animal in animals)
             {
-                DataOutput.ToConsole(dog.Name);
+                DataOutput.ToConsole(animal.Name);
             }
             DataOutput.ToConsole("");
         }
 
-        public void ListCurrentDogs()
+        public void ListCurrentAnimals()
         {
-            var dogs = Db.GetCurrentDogs();
-            var customers = Db.GetAllCustomers();
+            var animals = Db.GetCurrentAnimals();
+            var persons = Db.GetAllPersons();
 
             DataOutput.ToConsole("");
 
-            foreach (var dog in dogs)
+            foreach (var animal in animals)
             {
-                DataOutput.ToConsole(dog.Name);
+                DataOutput.ToConsole(animal.Name);
 
-                foreach (var customer in customers)
+                foreach (var person in persons)
                 {
-                    if (customer.PersonalIdentificationNumber == dog.OwnersPersonalID)
+                    if (person.PersonalIdentificationNumber == animal.OwnersPersonalID)
                     {
-                        DataOutput.ToConsole(" and its owner " + customer.FirstName + " " + customer.LastName);
+                        DataOutput.ToConsole(" and its owner " + person.FirstName + " " + person.LastName);
                         DataOutput.ToConsole("");
                     }
                 }
@@ -193,4 +190,3 @@ namespace TheKennelProject.Animals
         }
     }
 }
-

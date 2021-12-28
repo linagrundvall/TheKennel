@@ -40,19 +40,19 @@ namespace TheKennelProject.MockData
             Sven.FirstName = "Sven";
             Sven.LastName = "Svensson";
             Sven.PersonalIdentificationNumber = "1234";
-            Db.Customers.Add(Sven);
+            Db.Persons.Add(Sven);
 
             var Eva = new Customer();
             Eva.FirstName = "Eva";
             Eva.LastName = "Evasdottir";
             Eva.PersonalIdentificationNumber = "5678";
-            Db.Customers.Add(Eva);
+            Db.Persons.Add(Eva);
 
             var Adam = new Customer();
             Adam.FirstName = "Adam";
             Adam.LastName = "Adamsson";
             Adam.PersonalIdentificationNumber = "4321";
-            Db.Customers.Add(Adam);
+            Db.Persons.Add(Adam);
         }
 
         public void MakeDogs()
@@ -62,28 +62,27 @@ namespace TheKennelProject.MockData
             Lina.Notes = "She is a kind dog. Likes belly rubs";
             Lina.OwnersPersonalID = "5678";
             Lina.IsCheckedIn = true;
-            Db.Dogs.Add(Lina);
+            Db.Animals.Add(Lina);
 
             var Nina = new Dog();
             Nina.Name = "Nina";
             Nina.Notes = "Loves long walks in the forrest.";
             Nina.OwnersPersonalID = "5678";
             Nina.IsCheckedIn = false;
-            Db.Dogs.Add(Nina);
+            Db.Animals.Add(Nina);
 
             var Toby = new Dog();
             Toby.Name = "Toby";
             Toby.OwnersPersonalID = "4321";
             Toby.IsCheckedIn = true;
-            Db.Dogs.Add(Toby);
+            Db.Animals.Add(Toby);
 
             var Molly = new Dog();
             Molly.Name = "Molly";
             Molly.Notes = "Molly is a princess.";
             Molly.OwnersPersonalID = "1234";
             Molly.IsCheckedIn = true;
-            Db.Dogs.Add(Molly);
+            Db.Animals.Add(Molly);
         }
-
     }
 }

@@ -10,7 +10,6 @@ using TheKennelProject.Animals;
 
 namespace TheKennelProject.Data
 {
-
     class DataRepository : IDataRepository
     {
         public IDBUsingLists Db { get; set; }
@@ -21,46 +20,46 @@ namespace TheKennelProject.Data
         }
 
         #region Customer
-        public List<IPerson> GetAllCustomers()
+        public List<IPerson> GetAllPersons()
         {
-            return Db.Customers.ToList();
+            return Db.Persons.ToList();
         }
 
-        public IPerson GetCustomerByPersonalIdNumber(string personalIdentificationNumber)
+        public IPerson GetPersonByPersonalIdNumber(string personalIdentificationNumber)
         {
-            return Db.Customers.Where(c => c.PersonalIdentificationNumber == personalIdentificationNumber).FirstOrDefault();
+            return Db.Persons.Where(c => c.PersonalIdentificationNumber == personalIdentificationNumber).FirstOrDefault();
         }
 
-        public void SaveCustomer(IPerson customer)
+        public void SavePerson(IPerson person)
         {
-            Db.Customers.Add(customer);
+            Db.Persons.Add(person);
         }
         #endregion
 
         #region Dogs
-        public List<IAnimal> GetAllDogs()
+        public List<IAnimal> GetAllAnimals()
         {
-            return Db.Dogs.ToList();
+            return Db.Animals.ToList();
         }
 
-        public List<IAnimal> GetCurrentDogs()
+        public List<IAnimal> GetCurrentAnimals()
         {
-            return Db.Dogs.Where(d => d.IsCheckedIn == true).ToList();
+            return Db.Animals.Where(d => d.IsCheckedIn == true).ToList();
         }
 
-        public IAnimal GetDogByName(string name)
+        public IAnimal GetAnimalByName(string name)
         {
-            return Db.Dogs.Where(d => d.Name == name).FirstOrDefault();
+            return Db.Animals.Where(d => d.Name == name).FirstOrDefault();
         }
 
-        public IAnimal GetDogByOwnersPersonalID(string personalIdentificationNumber)
+        public IAnimal GetAnimalByOwnersPersonalID(string personalIdentificationNumber)
         {
-            return Db.Dogs.Where(d => d.OwnersPersonalID == personalIdentificationNumber).FirstOrDefault();
+            return Db.Animals.Where(d => d.OwnersPersonalID == personalIdentificationNumber).FirstOrDefault();
         }
 
-        public void SaveDog(IAnimal dog)
+        public void SaveAnimal(IAnimal animal)
         {
-            Db.Dogs.Add(dog);
+            Db.Animals.Add(animal);
         }
         #endregion
 
@@ -70,12 +69,12 @@ namespace TheKennelProject.Data
             return Db.Treatments.ToList();
         }
 
-        public double GetTreatmentPrice(ITreatment dogTreatment)
+        public double GetTreatmentPrice(ITreatment animalTreatment)
         {
             var treatments = GetAllTreatments();
             foreach (var treatment in treatments)
             {
-                if (treatment.Name == dogTreatment.Name)
+                if (treatment.Name == animalTreatment.Name)
                 {
                     return treatment.Price;
                 }

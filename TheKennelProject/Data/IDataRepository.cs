@@ -12,20 +12,20 @@ namespace TheKennelProject.Data
         IDBUsingLists Db { get; set; }
 
         //Customers
-        List<IPerson> GetAllCustomers();
-        IPerson GetCustomerByPersonalIdNumber(string personalIdentificationNumber);
-        void SaveCustomer(IPerson customer);
+        List<IPerson> GetAllPersons();
+        IPerson GetPersonByPersonalIdNumber(string personalIdentificationNumber);
+        void SavePerson(IPerson customer);
 
         //Dogs
-        List<IAnimal> GetAllDogs();
-        List<IAnimal> GetCurrentDogs();
-        IAnimal GetDogByName(string name);
-        IAnimal GetDogByOwnersPersonalID(string personalIdentificationNumber);
-        void SaveDog(IAnimal dog);
+        List<IAnimal> GetAllAnimals();
+        List<IAnimal> GetCurrentAnimals();
+        IAnimal GetAnimalByName(string name);
+        IAnimal GetAnimalByOwnersPersonalID(string personalIdentificationNumber);
+        void SaveAnimal(IAnimal animal);
 
         //Treatment
         List<ITreatment> GetAllTreatments();
-        double GetTreatmentPrice(ITreatment dogTreatment);
+        double GetTreatmentPrice(ITreatment animalTreatment);
 
         //Booking
         List<IBooking> GetAllBookings();

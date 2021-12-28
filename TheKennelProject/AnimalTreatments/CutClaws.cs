@@ -9,9 +9,7 @@ namespace TheKennelProject.AnimalTreatments
     class CutClaws : ITreatment
     {
         public string Name => "CutClaws";
-
         public string Description => "The animals claws are being cut.";
-
         public bool TrueOrFalse { get; set; }
         public double Price { get; set; }
     }

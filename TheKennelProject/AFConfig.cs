@@ -36,35 +36,22 @@ namespace TheKennelProject
             builder.RegisterType<Booking>().As<IBooking>();
             builder.RegisterType<BookingManager>().As<IBookingManager>();
 
-            //Dogs
+            //Animals
             builder.RegisterType<Dog>().As<IAnimal>();
-            builder.RegisterType<DogManager>().As<IDogManager>();
+            builder.RegisterType<AnimalManager>().As<IAnimalManager>();
 
-            //Customers
+            //Persons
             builder.RegisterType<Customer>().As<IPerson>();
-            builder.RegisterType<CustomerManager>().As<ICustomerManager>();
+            builder.RegisterType<PersonManager>().As<IPersonManager>();
 
             //Main menu
             builder.RegisterType<MainMenu>().As<IMenu>();
 
-            //Menu dog
-            builder.RegisterType<MenuDog>().As<IMenuDog>();
+            //Menu animal
+            builder.RegisterType<MenuAnimal>().As<IMenuAnimal>();
 
-            //Menu customer
-            builder.RegisterType<MenuCustomer>().As<IMenuCustomer>();
-
-            ////Animals
-            //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
-            //    .Where(Type i => i.Namespace.Contains(value: "Animals"))
-            //    .As(Type i => i.GetInterfaces()
-            //    .FirstOrDefault(Type n => n.Name == "I" + i.Name));
-
-            ////Delegate factory
-            //builder.RegisterType<MenuOptions>();
-            //builder.RegisterType<Dog>().Keyed<IAnimal>(serviceKey: "Dog").InstancePerDependency();
-
-            //Register one by one (D, exaple)
-            //builder.RegisterType<Task>().As<ITask>();
+            //Menu person
+            builder.RegisterType<MenuPerson>().As<IMenuPerson>();
 
             return builder.Build();
         }

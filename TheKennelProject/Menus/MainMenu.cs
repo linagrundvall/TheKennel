@@ -12,19 +12,19 @@ namespace TheKennelProject.Menus
 {
     class MainMenu : IMenu
     {
-        public IDogManager DogManager { get; set; }
-        public ICustomerManager CustomerManager { get; set; }
+        public IAnimalManager AnimalManager { get; set; }
+        public IPersonManager PersonManager { get; set; }
         public IBookingManager BookingManager { get; set; }
-        public IMenuCustomer MenuForCustomer { get; set; }
-        public IMenuDog MenuForDog { get; set; }
+        public IMenuPerson MenuForPerson { get; set; }
+        public IMenuAnimal MenuForAnimal { get; set; }
 
-        public MainMenu(IDogManager dogManager, ICustomerManager customerManager, IBookingManager bookingManager, IMenuCustomer menuForCustomer, IMenuDog menuForDog)
+        public MainMenu(IAnimalManager animalManager, IPersonManager personManager, IBookingManager bookingManager, IMenuPerson menuForPerson, IMenuAnimal menuForAnimal)
         {
-            DogManager = dogManager;
-            CustomerManager = customerManager;
+            AnimalManager = animalManager;
+            PersonManager = personManager;
             BookingManager = bookingManager;
-            MenuForCustomer = menuForCustomer;
-            MenuForDog = menuForDog;
+            MenuForPerson = menuForPerson;
+            MenuForAnimal = menuForAnimal;
         }
 
         public void Show()
@@ -35,8 +35,8 @@ namespace TheKennelProject.Menus
             DataOutput.ToConsole("");
             DataOutput.ToConsole("********************************************");
             DataOutput.ToConsole("");
-            DataOutput.ToConsole("1. Customer");
-            DataOutput.ToConsole("2. Dog");
+            DataOutput.ToConsole("1. Person");
+            DataOutput.ToConsole("2. Animal");
             DataOutput.ToConsole("");
             DataOutput.ToConsole("********************************************");
         }
@@ -48,13 +48,13 @@ namespace TheKennelProject.Menus
             {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    MenuForCustomer.Show();
-                    MenuForCustomer.GetInput();
+                    MenuForPerson.Show();
+                    MenuForPerson.GetInput();
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    MenuForDog.Show();
-                    MenuForDog.GetInput();
+                    MenuForAnimal.Show();
+                    MenuForAnimal.GetInput();
                     break;
                 default:
                     DataOutput.ToConsole("Unknown command. Please try again.");

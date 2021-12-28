@@ -10,16 +10,16 @@ using TheKennelProject.Persons;
 
 namespace TheKennelProject.Menus
 {
-    class MenuCustomer : IMenuCustomer
+    class MenuPerson : IMenuPerson
     {
-        public IDogManager DogManager { get; set; }
-        public ICustomerManager CustomerManager { get; set; }
+        public IAnimalManager AnimalManager { get; set; }
+        public IPersonManager PersonManager { get; set; }
         public IBookingManager BookingManager { get; set; }
 
-        public MenuCustomer(IDogManager dogManager, ICustomerManager customerManager, IBookingManager bookingManager)
+        public MenuPerson(IAnimalManager animalManager, IPersonManager personManager, IBookingManager bookingManager)
         {
-            DogManager = dogManager;
-            CustomerManager = customerManager;
+            AnimalManager = animalManager;
+            PersonManager = personManager;
             BookingManager = bookingManager;
         }
         public void Show()
@@ -30,9 +30,9 @@ namespace TheKennelProject.Menus
             DataOutput.ToConsole("");
             DataOutput.ToConsole("********************************************");
             DataOutput.ToConsole("");
-            DataOutput.ToConsole("1. Register customer");
-            DataOutput.ToConsole("2. List registered customer");
-            DataOutput.ToConsole("3. List registered customer with their dogs");
+            DataOutput.ToConsole("1. Register person");
+            DataOutput.ToConsole("2. List registered persons");
+            DataOutput.ToConsole("3. List registered persons with their dogs");
             DataOutput.ToConsole("");
             DataOutput.ToConsole("********************************************");
         }
@@ -44,16 +44,16 @@ namespace TheKennelProject.Menus
             {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    CustomerManager.RegisterCustomer();
-                    CustomerManager.SaveCustomer();
+                    PersonManager.RegisterPerson();
+                    PersonManager.SavePerson();
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    CustomerManager.ListCustomers();
+                    PersonManager.ListPersons();
                     break;
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
-                    CustomerManager.ListCustomersWithDogs();
+                    PersonManager.ListPersonsWithAnimals();
                     break;
                 default:
                     DataOutput.ToConsole("Unknown command. Please try again.");

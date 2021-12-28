@@ -9,7 +9,7 @@ using TheKennelProject.AnimalTreatments;
 
 namespace TheKennelProject.Animals
 {
-    class Dog : IAnimal
+    class Dog : IAnimal, IDog
     {
         public Guid ID { get; set; }
         public string OwnersPersonalID { get; set; }
